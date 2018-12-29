@@ -1,4 +1,4 @@
-package entity;
+package Utils;
 
 public enum Type {
 	Confirm,Pay

@@ -2,5 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Gabi Malin/Desktop/Java workSpace/FlipCoin-Mining/UCanAccess-4.0.2-bin/ucanaccess-4.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gabi Malin/Desktop/Java workSpace/FlipCoin-Mining/UCanAccess-4.0.2-bin/lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gabi Malin/Desktop/Java workSpace/FlipCoin-Mining/UCanAccess-4.0.2-bin/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gabi Malin/Desktop/Java workSpace/FlipCoin-Mining/UCanAccess-4.0.2-bin/lib/hsqldb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gabi Malin/Desktop/Java workSpace/FlipCoin-Mining/UCanAccess-4.0.2-bin/lib/jackcess-2.1.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

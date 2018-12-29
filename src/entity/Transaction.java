@@ -1,4 +1,7 @@
 package entity;
+
+import Utils.Type;
+
 /**
  *  Class for transaction
  * @author Gabi Malin
@@ -9,6 +12,7 @@ public class Transaction {
 	private int size;
 	private Type type;
 	private int commission;
+	private String address;
 	
 	
 	
@@ -22,12 +26,13 @@ public class Transaction {
 		this.commission = comission;
 	}
 	
-	public Transaction(String ID, int size, Type type, int commission) {
+	public Transaction(String ID, int size, Type type, String address ,int commission) {
 		super();
 		this.ID = ID;
 		this.size = size;
 		this.type = type;
 		this.commission = commission;
+		this.setAddress(address);
 	}
 
 	public String getID() {
@@ -46,6 +51,15 @@ public class Transaction {
 		return commission;
 	}
 
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,6 +89,8 @@ public class Transaction {
 	public String toString() {
 		return "Transaction [ID=" + ID + ", size=" + size + ", type=" + type + ", commission=" + commission + "]";
 	}
+
+	
 	
 	
 	
