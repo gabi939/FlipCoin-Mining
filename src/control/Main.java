@@ -1,6 +1,9 @@
 package control;
 
+import java.util.Date;
+
 import boundry.ViewLogic;
+import entity.Block;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,7 +16,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		System.out.println(TransactionLogic.getAllNotExecutedTransactions());
+		TransactionLogic.addBlock(new Block("block9", "block8", "miner1", new Date(), 5));
 		ViewLogic.initUI();
 	}
 

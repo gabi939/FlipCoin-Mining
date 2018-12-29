@@ -7,6 +7,9 @@ public class Consts {
 	protected static final String DB_FILEPATH = getDBPath();
 	public static final String CONN_STR = "jdbc:ucanaccess://" + DB_FILEPATH + ";COLUMNORDER=DISPLAY";
 	public static final String GET_ALL_NOT_CHOSEN = "SELECT * FROM tblTransaction WHERE BlockAddress IS NULL ";
+	public static final String ADD_BLOCK = "{ call addBlock(?,?,?,?,?) }";
+	
+	
 	
 	private static String getDBPath() {
 		try {
