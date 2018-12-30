@@ -16,9 +16,39 @@ import entity.Transaction;
 public abstract class TransactionLogic {
 	
 	
+	
+	
+	
+	public static boolean addToBlock(Block block , Transaction a ) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_TRANSACTION)) {
+				int i = 1;
+
+				stmt.setInt(i++, a.getSize());
+				stmt.setString(i++, a.getType().toString());
+				stmt.setString(i++,block.getBlockAddress());
+				stmt.setInt(i++, a.getCommission());
+				stmt.setString(i, a.getAddress());
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
+		
+		
+		
+		
+		
+	}
 
 
-	public static boolean addBlock(Block block) {
+/*	public static boolean addBlock(Block block) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -40,7 +70,7 @@ public abstract class TransactionLogic {
 		}
 		return false;
 		
-	}
+	}*/
 	
 	public static ArrayList<Transaction> getAllNotExecutedTransactions() {
 		ArrayList<Transaction> results = new ArrayList<Transaction>();
@@ -53,7 +83,7 @@ public abstract class TransactionLogic {
 				while (rs.next()) {
 					int i = 1;
 					results.add(new Transaction(rs.getString(i++),rs.getInt(i++),Type.valueOf(rs.getString(i++)),
-							rs.getString(i++),rs.getInt(i++)));
+							rs.getInt(i++),rs.getString(i++)));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -26,13 +26,13 @@ public class Transaction {
 		this.commission = comission;
 	}
 	
-	public Transaction(String ID, int size, Type type, String address ,int commission) {
+	public Transaction(String ID, int size, Type type ,int commission , String address) {
 		super();
 		this.ID = ID;
 		this.size = size;
 		this.type = type;
 		this.commission = commission;
-		this.setAddress(address);
+		this.address = address;
 	}
 
 	public String getID() {
