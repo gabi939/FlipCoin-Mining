@@ -1,7 +1,6 @@
 package control;
 
 
-import Utils.Type;
 import boundry.ViewLogic;
 import entity.Block;
 import entity.Transaction;
@@ -11,14 +10,15 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	public static void main(String[] args) {
+		System.out.println("quack");
+		TransactionLogic.addToBlock(new Block("block2"), new Transaction("PAY7"));
 		launch(args);
 
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		TransactionLogic.addToBlock(new Block("block3"), new Transaction("PAY7",2,Type.Pay,5,null));
-	//	ViewLogic.initUI();
+		ViewLogic.initUI();
 	}
 
 }

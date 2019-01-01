@@ -13,7 +13,19 @@ import javafx.stage.Stage;
 public abstract class ViewLogic {
 
 	public static void initUI() {
-
+		blocksWindow();
+		
+	}
+	
+	
+	
+	protected static void blocksWindow() {
+		Stage stage = new Stage();
+		newWindow(ViewLogic.class.getResource("blockWindow.fxml"), stage, false,"blocks",false);
+		
+		
+		
+		
 	}
 
 	
