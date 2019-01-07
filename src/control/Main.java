@@ -10,9 +10,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	public static void main(String[] args) {
-		System.out.println("quack");
-		TransactionLogic.addToBlock(new Block("block2"), new Transaction("PAY7"));
-		launch(args);
+		Communication.sendXml();
+		//launch(args);
 
 	}
 

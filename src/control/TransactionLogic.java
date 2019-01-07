@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.concurrent.Callable;
 
 import Utils.Consts;
 import Utils.Type;
@@ -18,6 +17,35 @@ import entity.Miner;
 import entity.Transaction;
 
 public abstract class TransactionLogic {
+	
+	
+	public static ArrayList<Transaction> getAllexecuted(){
+		ArrayList<Transaction> results = new ArrayList<Transaction>();
+
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_GET_EXECUTED_TRANSACTIONS)) {
+
+			
+				ResultSet rs = stmt.executeQuery();
+				
+				while (rs.next()) {
+					
+					results.add(new Transaction(rs.getString(1) , rs.getInt(2) , Type.valueOf(rs.getString(3)),rs.getInt(4) , rs.getString(5)));
+				}
+				
+				return results;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return results;
+		
+		
+	}
 	
 	
 	public static ArrayList<Block> getMinerBlocks(Miner miner){
@@ -53,6 +81,7 @@ public abstract class TransactionLogic {
 	public static ArrayList<Transaction> getBestTrans(){
 		ArrayList<Transaction> temp = getAllNotExecutedTransactions();
 	
+		System.err.println(temp);
 		Collections.sort(temp, new Comparator<Transaction>() {
 
 			@Override
@@ -60,7 +89,8 @@ public abstract class TransactionLogic {
 
 				if(a.getCommission() > b.getCommission())
 					return 1;
-				return -1;
+				else
+					return -1;
 			}
 		});
 		

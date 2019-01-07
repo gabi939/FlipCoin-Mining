@@ -9,7 +9,10 @@ public class Consts {
 	public static final String GET_ALL_NOT_CHOSEN = "SELECT * FROM tblTransaction WHERE BlockAddress IS NULL ";
 	public static final String ADD_BLOCK = "{ call addBlock(?,?) }";
 	public static final String SQL_UPD_TRANSACTION = "UPDATE tblTransaction SET tblTransaction.BlockAddress = (?) WHERE (((tblTransaction.TranscationId)=(?)));";
-	
+	public static final String SQL_GET_EXECUTED_TRANSACTIONS = "SELECT tblTransaction.TranscationId, tblTransaction.Size , tblTransaction.Type,  tblTransaction.Comission,tblTransaction.BlockAddress\r\n" + 
+			"FROM tblTransaction\r\n" + 
+			"WHERE (([BlockAddress] Is Not Null) AND ((\"BlockAddress\") Is Not Null))";
+
 	
 	
 	private static String getDBPath() {
