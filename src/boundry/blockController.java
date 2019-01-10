@@ -53,11 +53,11 @@ public class blockController implements Initializable {
 		if (trans.size() > 2) {
 			address1.setText(trans.get(0).getID());
 			address2.setText(trans.get(1).getID());
-			sum.setText(Integer.toString(trans.get(0).getSize() + trans.get(1).getSize()));
+			sum.setText(Double.toString(trans.get(0).getSize() + trans.get(1).getSize()));
 
 		} else if (trans.size() > 1) {
 			address1.setText(trans.get(0).getID());
-			sum.setText(Integer.toString(trans.get(0).getSize()));
+			sum.setText(Double.toString(trans.get(0).getSize()));
 
 		}
 

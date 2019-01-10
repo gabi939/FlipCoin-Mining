@@ -1,7 +1,9 @@
 package control;
 
 import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,14 +14,21 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.w3c.dom.Attr;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import Utils.Type;
 import entity.Transaction;
 
 public abstract class Communication {
 
+	
+	/**
+	 * sends executed transactions to flipCoin Transfer via XML  
+	 */
 	public static void sendXml() {
 		try {
 
@@ -33,29 +42,47 @@ public abstract class Communication {
 			Element transactions = doc.createElement("Transcation");
 			doc.appendChild(transactions);
 
+			/**
+			 * adding elements to transactions array that will be sent
+			 * 
+			 * 1) create root element of transaction 
+			 * 
+			 * 2) add its attributes 
+			 *
+			 * 3) add transaction to the array
+			 */
 			for (Transaction temp : DBtrans) {
-				// staff elements
+				
+				//1)
 				Element trans = doc.createElement("Transaction");
+				
+				
+				
+				// 2)
 				Element id = doc.createElement("transId");
 				id.appendChild(doc.createTextNode(temp.getID()));
 				trans.appendChild(id);
+			
 				Element size = doc.createElement("size");
-				size.appendChild(doc.createTextNode(Integer.toString(temp.getSize())));
+				size.appendChild(doc.createTextNode(Double.toString(temp.getSize())));
 				trans.appendChild(size);
+				
 				Element type = doc.createElement("type");
 				type.appendChild(doc.createTextNode(temp.getType().toString()));
 				trans.appendChild(type);
+				
 				Element comission = doc.createElement("comission");
-				comission.appendChild(doc.createTextNode(Integer.toString(temp.getCommission())));
+				comission.appendChild(doc.createTextNode(Double.toString(temp.getCommission())));
 				trans.appendChild(comission);
+				
 				Element blockAddress = doc.createElement("blockAddress");
-				blockAddress.appendChild(doc.createTextNode(temp.getAddress()));
+				blockAddress.appendChild(doc.createTextNode(temp.getBlockAddress()));
 				trans.appendChild(blockAddress);
+			
+				//3)
 				transactions.appendChild(trans);
 
 			}
-
-			
 
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -74,6 +101,44 @@ public abstract class Communication {
 			pce.printStackTrace();
 		} catch (TransformerException tfe) {
 			tfe.printStackTrace();
+		}
+	}
+
+	
+	
+	/**
+	 * reads json from flipCoin transfer
+	 */
+	public static void receiveJSON() {
+		ArrayList<Transaction> results = new ArrayList<>();
+		JSONParser parser = new JSONParser();
+
+		try {
+			
+			//gets the json and puts it inside OBJECT 
+			Object obj = parser.parse(new FileReader(
+                    "JSON.txt"));
+
+			// an array of json object was sent from flip coin transfer 
+			JSONArray jsonObjectArray = (JSONArray) obj;
+			
+			
+			@SuppressWarnings("unchecked")
+			Iterator<JSONObject> it = jsonObjectArray.iterator();
+			
+			//translate the json array to transaction array 
+			while (it.hasNext()) {
+				JSONObject jsonObject = (JSONObject) it.next();
+				results.add(new Transaction((String)jsonObject.get("ID"),(Double) jsonObject.get("Size"),Type.valueOf((String) jsonObject.get("Type")), (Double)jsonObject.get("Comission"), null));
+				
+			}
+			
+			//adds transactions to DB
+			TransactionLogic.insertNewTransactions(results);
+
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

@@ -9,10 +9,10 @@ import Utils.Type;
  */
 public class Transaction {
 	private String ID;
-	private int size;
+	private double size;
 	private Type type;
-	private int commission;
-	private String address;
+	private double commission;
+	private String blockAddress;
 	
 	
 	
@@ -26,20 +26,20 @@ public class Transaction {
 		this.commission = comission;
 	}
 	
-	public Transaction(String ID, int size, Type type ,int commission , String address) {
+	public Transaction(String ID, double size, Type type ,double commission , String blockAddress) {
 		super();
 		this.ID = ID;
 		this.size = size;
 		this.type = type;
 		this.commission = commission;
-		this.address = address;
+		this.blockAddress = blockAddress;
 	}
 
 	public String getID() {
 		return ID;
 	}
 
-	public int getSize() {
+	public double getSize() {
 		return size;
 	}
 
@@ -47,17 +47,17 @@ public class Transaction {
 		return type;
 	}
 
-	public int getCommission() {
+	public double getCommission() {
 		return commission;
 	}
 
 	
-	public String getAddress() {
-		return address;
+	public String getBlockAddress() {
+		return blockAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setBlockAddress(String blockAddress) {
+		this.blockAddress = blockAddress;
 	}
 	
 	@Override
