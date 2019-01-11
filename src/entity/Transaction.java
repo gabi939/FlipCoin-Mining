@@ -1,5 +1,8 @@
 package entity;
 
+
+import java.sql.Date;
+
 import Utils.Type;
 
 /**
@@ -13,6 +16,7 @@ public class Transaction {
 	private Type type;
 	private double commission;
 	private String blockAddress;
+	private Date additionTime; // SQL type!!! .... it mainly used for DB reasons so i did it this way
 	
 	
 	
@@ -26,6 +30,8 @@ public class Transaction {
 		this.commission = comission;
 	}
 	
+	
+
 	public Transaction(String ID, double size, Type type ,double commission , String blockAddress) {
 		super();
 		this.ID = ID;
@@ -33,6 +39,15 @@ public class Transaction {
 		this.type = type;
 		this.commission = commission;
 		this.blockAddress = blockAddress;
+	}
+	
+	
+	public void wasAddedToBlock() {
+		additionTime = new Date( new java.util.Date().getTime());
+	}
+	
+	public Date getAdditionTime() {
+		return additionTime;
 	}
 
 	public String getID() {

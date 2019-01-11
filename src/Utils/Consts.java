@@ -10,7 +10,7 @@ public class Consts {
 	
 	//=========================================== Transactions Query =================================================
 	public static final String GET_ALL_NOT_CHOSEN = "SELECT * FROM tblTransaction WHERE BlockAddress IS NULL ";
-	public static final String SQL_UPD_TRANSACTION = "{ call updateTransaction(?,?) }";
+	public static final String SQL_UPD_TRANSACTION = "{ call updateTransaction(?,?,?) }";
 	public static final String SQL_GET_EXECUTED_TRANSACTIONS = "SELECT tblTransaction.TranscationId, tblTransaction.Size , tblTransaction.Type,  tblTransaction.Comission,tblTransaction.BlockAddress\r\n" + 
 			"FROM tblTransaction\r\n" + 
 			"WHERE (([BlockAddress] Is Not Null) AND ((\"BlockAddress\") Is Not Null))";

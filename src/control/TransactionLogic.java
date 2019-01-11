@@ -124,9 +124,13 @@ public abstract class TransactionLogic {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
 					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_TRANSACTION)) {
-				int i = 1;
-				stmt.setString(i++, block.getBlockAddress());
-				stmt.setString(i, a.getID());
+
+				a.wasAddedToBlock();
+
+				stmt.setString(1, block.getBlockAddress());
+				stmt.setDate(2, a.getAdditionTime());
+				stmt.setString(3, a.getID());
+				
 				stmt.executeUpdate();
 				return true;
 			} catch (SQLException e) {
@@ -183,6 +187,7 @@ public abstract class TransactionLogic {
 					stmt.setString(3, temp.getType().toString());
 					stmt.setDouble(4, temp.getCommission());
 					stmt.setString(5, temp.getBlockAddress());
+					
 
 					stmt.executeUpdate();
 				}
