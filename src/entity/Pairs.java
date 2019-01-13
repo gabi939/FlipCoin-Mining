@@ -8,7 +8,7 @@ public class Pairs {
 	
 	
 	
-	public Pairs(String trans1, String trans2, double size, double comission) {
+	public Pairs(String trans1, String trans2, double comission , double size) {
 		super();
 		this.trans1 = trans1;
 		this.trans2 = trans2;
