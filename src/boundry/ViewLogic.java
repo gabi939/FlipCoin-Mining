@@ -14,7 +14,8 @@ public abstract class ViewLogic {
 
 	public static void initUI() {
 		Stage stage = new Stage();
-		newWindow(ViewLogic.class.getResource("2.fxml"), stage, false,"Transaction Test",false);
+	//	newWindow(ViewLogic.class.getResource("2.fxml"), stage, false,"Transaction Test",false);
+		newWindow(ViewLogic.class.getResource("1.fxml"), stage, false,"Transaction Mining",false);
 		//blocksWindow();
 		
 	}
