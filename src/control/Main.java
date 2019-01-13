@@ -15,7 +15,7 @@ public class Main extends Application {
 		TransactionLogic.addToBlock(new Block("block2"), new Transaction("PAY7"));
 		
 		//	Communication.receiveJSON();
-		//launch(args);
+		launch(args);
 
 	}
 

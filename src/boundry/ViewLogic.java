@@ -13,7 +13,9 @@ import javafx.stage.Stage;
 public abstract class ViewLogic {
 
 	public static void initUI() {
-		blocksWindow();
+		Stage stage = new Stage();
+		newWindow(ViewLogic.class.getResource("2.fxml"), stage, false,"Transaction Test",false);
+		//blocksWindow();
 		
 	}
 	

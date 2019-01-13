@@ -2,6 +2,8 @@ package control;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -20,6 +22,7 @@ import org.json.simple.parser.JSONParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import Utils.Consts;
 import Utils.Type;
 import entity.Transaction;
 
@@ -28,8 +31,9 @@ public abstract class Communication {
 	
 	/**
 	 * sends executed transactions to flipCoin Transfer via XML  
+	 * @throws UnsupportedEncodingException 
 	 */
-	public static void sendXml() {
+	public static void sendXml() throws UnsupportedEncodingException {
 		try {
 
 			ArrayList<Transaction> DBtrans = TransactionLogic.getAllexecuted();
@@ -88,7 +92,10 @@ public abstract class Communication {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("C:\\UzFlipCoin-Mining\\file.xml"));
+			String path = Consts.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+			String decoded = URLDecoder.decode(path, "UTF-8");
+			decoded = decoded.substring(0, decoded.lastIndexOf("bin/"));
+			StreamResult result = new StreamResult(new File(decoded + "\\file.xml"));
 
 			// Output to console for testing
 			// StreamResult result = new StreamResult(System.out);
