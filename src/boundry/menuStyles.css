@@ -1,0 +1,43 @@
+#pane{
+	-fx-overflow-x:auto;
+	-fx-background-repeat: stretch;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+	-fx-background-fill: 50%;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+	-fx-text-color: #ffa500;
+    -fx-color: rgba(0,200,0);
+}
+Label{
+    -fx-effect: dropshadow(three-pass-box, white, 2, 1, 0, 0); 
+	-fx-color: #FFF;
+}
+
+ChoiceBox{
+	    -fx-background-radius: 10;
+  -fx-background-color: white;
+  -fx-mark-color: orange;
+ -fx-text-fill: blue; 
+}
+
+Button{
+ -fx-background-color: 
+        #c3c4c4,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,1;
+	-fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+
+}
+TableView{ 
+-fx-background-color: 
+        #c3c4c4,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+    -fx-background-insets: 0,1,1;
+	-fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+}

@@ -13,8 +13,7 @@ public class Main extends Application {
 	public static Miner user = null;  
 
 	public static void main(String[] args) {
-		//TransactionLogic.updateBlock("block2", 30);
-		
+
 		
 			//Communication.receiveJSON();
 		launch(args);
