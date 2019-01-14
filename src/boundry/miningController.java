@@ -6,9 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -65,6 +67,9 @@ public class miningController implements Initializable {
     @FXML
     private Label errorLabel;
 
+    @FXML
+    private Button backBtn;
+    
     private ArrayList<Block> blocks  = TransactionLogic.getMinerBlocks( Main.user);
 	private Block block = blocks.get(0);
 	@Override
@@ -95,7 +100,7 @@ public class miningController implements Initializable {
 		if(selected==null) {
 			errorLabel.setText("Select a Transaction from the Table");
 			return false;
-	}
+		}
 		if(blockSize<selected.getSize()) {
 			errorLabel.setText("No enough space in current Block");
 			return false;
@@ -107,8 +112,16 @@ public class miningController implements Initializable {
 		transactionsTableT.getItems().remove(selected);
 		transactionsTable.getItems().clear();
 		errorLabel.setText("Transaction added to the Block");
+		TransactionLogic.updateBlock(block.getBlockAddress(), blockSize);
 		transactionsTable.getItems().addAll(FXCollections.observableArrayList(TransactionLogic.getBestTrans()));
 		return true;
 	}
-	
+	@FXML
+	private void back(ActionEvent event) {
+		Stage stage = (Stage) backBtn.getScene().getWindow();
+		stage.close();
+		ViewLogic.mainMenu();
+
+	}
+
 }

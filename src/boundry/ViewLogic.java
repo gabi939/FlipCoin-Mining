@@ -13,14 +13,22 @@ import javafx.stage.Stage;
 public abstract class ViewLogic {
 
 	public static void initUI() {
-		Stage stage = new Stage();
-	//	newWindow(ViewLogic.class.getResource("2.fxml"), stage, false,"Transaction Test",false);
-		newWindow(ViewLogic.class.getResource("1.fxml"), stage, false,"Transaction Mining",false);
-		//blocksWindow();
-		
+//		Stage stage = new Stage();
+//	//	newWindow(ViewLogic.class.getResource("2.fxml"), stage, false,"Transaction Test",false);
+//		newWindow(ViewLogic.class.getResource("1.fxml"), stage, false,"Transaction Mining",false);
+//		//blocksWindow();
+		mainMenu();
 	}
 	
-	
+	protected static void mainMenu() {
+		Stage stage = new Stage();
+		newWindow(ViewLogic.class.getResource("3.fxml"), stage, false,"FlipCoinMining",false);
+		
+		
+		
+		
+	}
+
 	
 	protected static void blocksWindow() {
 		Stage stage = new Stage();
