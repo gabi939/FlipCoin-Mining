@@ -23,7 +23,7 @@ public class transactionManagementController {
     private Button backBtn;
 
     @FXML
-	private void importTransactions(ActionEvent event) {
+	private void importTransactions(ActionEvent event) throws UnsupportedEncodingException {
 		Communication.receiveJSON();
 		sucLabel.setText("JSON Received Transactions Added to DataBase");
 		importBtn.setDisable(true);

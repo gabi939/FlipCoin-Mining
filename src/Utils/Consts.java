@@ -38,9 +38,10 @@ public class Consts {
 		try {
 			String path = Consts.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			String decoded = URLDecoder.decode(path, "UTF-8");
+		
 			if (decoded.contains(".jar")) {
-				decoded = decoded.substring(0, decoded.lastIndexOf('/'));
-				return decoded + "/entity/DataBase_HW3.accdb";
+				decoded = decoded.substring(0, decoded.lastIndexOf("/"));
+				return decoded + "/src/entity/DataBase_HW3.accdb";
 			} else {
 				decoded = decoded.substring(0, decoded.lastIndexOf("bin/"));
 				return decoded + "src/entity/DataBase_HW3.accdb";

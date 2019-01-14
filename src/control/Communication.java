@@ -92,9 +92,15 @@ public abstract class Communication {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
+		
+			
 			String path = Consts.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			String decoded = URLDecoder.decode(path, "UTF-8");
-			decoded = decoded.substring(0, decoded.lastIndexOf("bin/"));
+			if (decoded.contains(".jar")) 
+				decoded = decoded.substring(0, decoded.lastIndexOf("/"));
+			else 
+				decoded = decoded.substring(0, decoded.lastIndexOf("bin/"));
+			
 			StreamResult result = new StreamResult(new File(decoded + "\\file.xml"));
 
 			// Output to console for testing
@@ -115,16 +121,25 @@ public abstract class Communication {
 	
 	/**
 	 * reads json from flipCoin transfer
+	 * @throws UnsupportedEncodingException 
 	 */
-	public static void receiveJSON() {
+	public static void receiveJSON() throws UnsupportedEncodingException {
 		ArrayList<Transaction> results = new ArrayList<>();
 		JSONParser parser = new JSONParser();
+		
+	
 
 		try {
 			
 			//gets the json and puts it inside OBJECT 
+			String path = Consts.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+			String decoded = URLDecoder.decode(path, "UTF-8");
+			if (decoded.contains(".jar")) 
+				decoded = decoded.substring(0, decoded.lastIndexOf("/"));
+			else 
+				decoded = decoded.substring(0, decoded.lastIndexOf("bin/"));
 			Object obj = parser.parse(new FileReader(
-                    "JSON.txt"));
+                    decoded + "\\JSON.txt"));
 
 			// an array of json object was sent from flip coin transfer 
 			JSONArray jsonObjectArray = (JSONArray) obj;

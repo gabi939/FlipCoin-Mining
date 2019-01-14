@@ -2,9 +2,7 @@ package control;
 
 
 import boundry.ViewLogic;
-import entity.Block;
 import entity.Miner;
-import entity.Transaction;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,8 +12,7 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 
-		
-			//Communication.receiveJSON();
+		user = new Miner("miner2");
 		launch(args);
 
 	}
