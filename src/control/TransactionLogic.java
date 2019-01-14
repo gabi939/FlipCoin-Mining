@@ -117,6 +117,30 @@ public abstract class TransactionLogic {
 		return results;
 	}
 
+	public static void updateBlock(String blockId , int size) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				CallableStatement stmt = conn.prepareCall(Consts.SQL_UPDATE_BLOCK);
+				
+				stmt.setInt(1, size);
+				stmt.setString(2, blockId);
+				stmt.executeUpdate();
+				
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		
+		
+		
+		
+	}
 	/**
 	 * adds a transaction to a specific block
 	 * 

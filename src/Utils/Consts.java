@@ -30,6 +30,7 @@ public class Consts {
 	
 	//=========================================== Block Query ===========================================================
 	public static final String ADD_BLOCK = "{ call addBlock(?,?) }";
+	public static final String SQL_UPDATE_BLOCK = "{ call updateBlock(?,?) }";
 
 	
 	
