@@ -1,6 +1,7 @@
 package boundry;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,9 +11,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import control.Main;
 import control.TransactionLogic;
+import entity.Block;
 import entity.Miner;
 import entity.Pairs;
 import entity.Transaction;
@@ -44,9 +48,6 @@ public class miningController implements Initializable {
 	private TableColumn<Pairs, Integer> commisionCol;
 
 	@FXML
-	private Button backBtn;
-
-	@FXML
 	private TableView<Transaction> transactionsTableT;
 
 	@FXML
@@ -61,24 +62,53 @@ public class miningController implements Initializable {
 	@FXML
 	private Button addBtn1;
 
-	@FXML
-	private Button backBtn1;
+    @FXML
+    private Label errorLabel;
 
+    private ArrayList<Block> blocks  = TransactionLogic.getMinerBlocks( Main.user);
+	private Block block = blocks.get(0);
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
-		
+		ArrayList<Block> blocks  = TransactionLogic.getMinerBlocks( Main.user);
+		Block block = blocks.get(0);
+		addressLabel.setText(Main.user.getAddress());
+		blockLabel.setText(block.getBlockAddress());
+		sizeLabel.setText(Integer.toString(block.getSize()));
 		System.out.println(TransactionLogic.getBestTrans());
-		System.out.println("aziz");
 		System.out.println(TransactionLogic.getBestTrans());
 		idCol.setCellValueFactory(new PropertyValueFactory<>("trans1"));
 		idCol2.setCellValueFactory(new PropertyValueFactory<>("trans2"));
 		sizeCol.setCellValueFactory(new PropertyValueFactory<>("size"));
 		commisionCol.setCellValueFactory(new PropertyValueFactory<>("comission"));
-		
+		idColT.setCellValueFactory(new PropertyValueFactory<>("ID"));
+		sizeColT.setCellValueFactory(new PropertyValueFactory<>("size"));
+		commisionColT.setCellValueFactory(new PropertyValueFactory<>("commission"));
+
 		
 		transactionsTable.getItems().addAll(FXCollections.observableArrayList(TransactionLogic.getBestTrans()));
-	
+		transactionsTableT.getItems().addAll(FXCollections.observableArrayList(TransactionLogic.getAllNotExecutedTransactions()));
 	}
-
+	@FXML
+	private boolean addTransactionToBlock(ActionEvent event) {
+		int blockSize = block.getSize();
+		Transaction selected = transactionsTableT.getSelectionModel().getSelectedItem();
+		if(selected==null) {
+			errorLabel.setText("Select a Transaction from the Table");
+			return false;
+	}
+		if(blockSize<selected.getSize()) {
+			errorLabel.setText("No enough space in current Block");
+			return false;
+		}
+		TransactionLogic.addToBlock(block, selected);
+		blockSize = (int) (blockSize - selected.getSize());
+		block.setSize(blockSize);
+		sizeLabel.setText(Integer.toString(blockSize));
+		transactionsTableT.getItems().remove(selected);
+		transactionsTable.getItems().clear();
+		errorLabel.setText("Transaction added to the Block");
+		transactionsTable.getItems().addAll(FXCollections.observableArrayList(TransactionLogic.getBestTrans()));
+		return true;
+	}
+	
 }

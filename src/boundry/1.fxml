@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="415.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundry.miningController">
+<VBox prefHeight="415.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundry.miningController">
    <children>
       <HBox prefHeight="60.0" prefWidth="600.0">
          <children>
@@ -91,10 +91,6 @@
                         <HBox prefHeight="50.0" prefWidth="600.0">
                            <children>
                               <ButtonBar prefHeight="50.0" prefWidth="435.0" HBox.hgrow="ALWAYS">
-                                 <buttons>
-                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
-                                    <Button fx:id="backBtn" mnemonicParsing="false" prefHeight="25.0" text="Go Back" />
-                                 </buttons>
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -140,19 +136,25 @@
                            </VBox.margin>
                         </TableView>
                         <Separator prefWidth="200.0" />
+                        <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="507.0">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="50.0" right="50.0" />
+                           </VBox.margin>
+                        </Label>
                         <HBox prefHeight="50.0" prefWidth="600.0">
                            <children>
                               <ButtonBar prefHeight="50.0" prefWidth="435.0" HBox.hgrow="ALWAYS">
                                  <buttons>
-                                    <Button fx:id="addBtn1" mnemonicParsing="false" prefWidth="229.0" text="Start Mining!" />
-                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
-                                    <Button fx:id="backBtn1" mnemonicParsing="false" prefHeight="25.0" text="Go Back" />
+                                    <Button fx:id="addBtn1" mnemonicParsing="false" onAction="#addTransactionToBlock" prefHeight="25.0" prefWidth="200.0" text="Add Transaction To Block" />
                                  </buttons>
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
                                  <padding>
-                                    <Insets right="30.0" />
+                                    <Insets right="100.0" />
                                  </padding>
                               </ButtonBar>
                            </children>
