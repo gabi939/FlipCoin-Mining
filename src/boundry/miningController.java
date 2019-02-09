@@ -76,8 +76,6 @@ public class miningController implements Initializable {
 		addressLabel.setText(Main.user.getAddress());
 		blockLabel.setText(block.getBlockAddress());
 		sizeLabel.setText(Integer.toString(block.getSize()));
-		System.out.println(TransactionLogic.getBestTrans());
-		System.out.println(TransactionLogic.getBestTrans());
 		idCol.setCellValueFactory(new PropertyValueFactory<>("trans1"));
 		idCol2.setCellValueFactory(new PropertyValueFactory<>("trans2"));
 		sizeCol.setCellValueFactory(new PropertyValueFactory<>("size"));

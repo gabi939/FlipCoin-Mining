@@ -19,14 +19,14 @@ public class menuController {
 		private void ieWindow(ActionEvent event) {
 			Stage stage = (Stage) exitBtn.getScene().getWindow();
 			stage.close();
-			ViewLogic.newWindow(ViewLogic.class.getResource("2.fxml"), stage, false,"Import Export Testing",false);
+			ViewLogic.newWindow(ViewLogic.class.getResource("WorkerImportExport.fxml"), stage, false,"Import Export Testing",false);
 
 		}
 	    @FXML
 		private void addTransWindow(ActionEvent event) {
 			Stage stage = (Stage) exitBtn.getScene().getWindow();
 			stage.close();
-			ViewLogic.newWindow(ViewLogic.class.getResource("1.fxml"), stage, false,"Block Management",false);
+			ViewLogic.newWindow(ViewLogic.class.getResource("MinerMinning.fxml"), stage, false,"Block Management",false);
 		}
 	    @FXML
 		private void exit(ActionEvent event) {

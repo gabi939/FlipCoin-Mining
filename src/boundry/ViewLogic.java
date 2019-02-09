@@ -22,7 +22,7 @@ public abstract class ViewLogic {
 	
 	protected static void mainMenu() {
 		Stage stage = new Stage();
-		newWindow(ViewLogic.class.getResource("3.fxml"), stage, false,"FlipCoinMining",false);
+		newWindow(ViewLogic.class.getResource("MinerMainMenu.fxml"), stage, false,"FlipCoinMining",false);
 		
 		
 		
@@ -30,14 +30,7 @@ public abstract class ViewLogic {
 	}
 
 	
-	protected static void blocksWindow() {
-		Stage stage = new Stage();
-		newWindow(ViewLogic.class.getResource("blockWindow.fxml"), stage, false,"blocks",false);
-		
-		
-		
-		
-	}
+
 
 	
 	

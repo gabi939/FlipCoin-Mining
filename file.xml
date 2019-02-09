@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Transcation><Transaction><transId>CON112</transId><size>5.0</size><type>Confirm</type><comission>3.0</comission><blockAddress>block5</blockAddress></Transaction><Transaction><transId>PAY345</transId><size>2.0</size><type>Pay</type><comission>8.0</comission><blockAddress>block5</blockAddress></Transaction></Transcation>

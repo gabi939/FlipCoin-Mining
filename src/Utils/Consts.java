@@ -31,6 +31,9 @@ public class Consts {
 	//=========================================== Block Query ===========================================================
 	public static final String ADD_BLOCK = "{ call addBlock(?,?) }";
 	public static final String SQL_UPDATE_BLOCK = "{ call updateBlock(?,?) }";
+	
+	// =========================================== miner ===========================================
+	public static final String UPDATE_PROFIT = " { call updateProfit(?,?) } ";
 
 	
 	

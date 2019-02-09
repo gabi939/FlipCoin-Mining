@@ -139,6 +139,30 @@ public abstract class TransactionLogic {
 		
 		
 	}
+	
+	
+	
+	public static void addProfit(Transaction a , Block b) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					CallableStatement stmt = conn.prepareCall(Consts.UPDATE_PROFIT)) {
+
+				a.wasAddedToBlock();
+
+				stmt.setDouble(1, a.getCommission());
+				stmt.setString(2, b.getOwner());
+
+				stmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 	/**
 	 * adds a transaction to a specific block
 	 * 
@@ -149,6 +173,7 @@ public abstract class TransactionLogic {
 	public static boolean addToBlock(Block block, Transaction a) {
 		update(block, a);
 		update1(block, a);
+		addProfit(a, block);
 		return true;
 
 	}
