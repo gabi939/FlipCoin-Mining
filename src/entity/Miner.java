@@ -1,11 +1,19 @@
 package entity;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import Utils.Consts;
+
 public class Miner {
 	
 	private String address;
 	private String name;
 	private String password; 
 	private String email;
+	private double digitalProfit;
 	
 	
 	
@@ -14,12 +22,13 @@ public class Miner {
 		this.address = address;
 	}
 
-	public Miner(String address,String name, String password, String email) {
+	public Miner(String address,String name, String password, String email , double digitalProfit) {
 		super();
 		this.address = address;
 		this.name = name;
 		this.password = password;
 		this.email = email;
+		this.digitalProfit = digitalProfit;
 	}
 
 	public String getName() {
@@ -28,6 +37,7 @@ public class Miner {
 
 	public void setName(String name) {
 		this.name = name;
+	
 	}
 
 	public String getPassword() {
@@ -50,8 +60,14 @@ public class Miner {
 		return address;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	
+
+	public double getDigitalProfit() {
+		return digitalProfit;
+	}
+
+	public void setDigitalProfit(double digitalProfit) {
+		this.digitalProfit = digitalProfit;
 	} 
 	
 	

@@ -7,17 +7,17 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="HBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SignUpLoginController">
+<HBox id="HBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundry.SignUpLoginController">
    <children>
       <VBox fx:id="LoginBox" alignment="CENTER" prefHeight="300.0" prefWidth="241.0" spacing="5.0">
          <children>
             <Label text="Welcome!" />
-            <JFXTextField fx:id="inputUser" promptText="Username" />
-            <JFXPasswordField fx:id="inputPass" promptText="Password" />
-            <JFXRadioButton fx:id="workerRadio" text="As Worker" />
+            <JFXTextField fx:id="loginUserNameTextField" promptText="Username" />
+            <JFXPasswordField fx:id="loginPasswordTextField" promptText="Password" />
             <JFXButton fx:id="loginBtn" onAction="#Login" text="Login" />
             <Label fx:id="loginError" prefHeight="17.0" prefWidth="200.0" />
          </children>
@@ -29,11 +29,49 @@
       <VBox alignment="CENTER" prefHeight="300.0" prefWidth="280.0" spacing="5.0">
          <children>
             <Label text="Sign Up Form" />
-            <JFXTextField fx:id="newUser" promptText="Username" />
-            <JFXPasswordField fx:id="pass1" promptText="Password" />
-            <JFXPasswordField fx:id="pass2" promptText="Validate Password" />
-            <JFXTextField fx:id="newEmail" promptText="Email" />
-            <JFXTextField fx:id="newPhone" promptText="Phone Number" />
+            <VBox spacing="5.0">
+               <children>
+                  <JFXTextField fx:id="MinerNameTextField" promptText="Username" />
+                  <JFXPasswordField fx:id="MnerPass1TextField" promptText="Password" />
+                  <JFXPasswordField fx:id="MnerPass2TextField" promptText="Validate Password" />
+                  <JFXTextField fx:id="MnerEmailTextField" promptText="Email" />
+                  <HBox alignment="CENTER" spacing="5.0">
+                     <children>
+                        <JFXRadioButton fx:id="radioBtnPrivate" onAction="#privateSelected" prefHeight="17.0" prefWidth="66.0" selected="true" text="Private">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="companyOrPrivate" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="radioBtnCompany" onAction="#companySelected" prefHeight="17.0" prefWidth="89.0" text="Company" toggleGroup="$companyOrPrivate">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin></JFXRadioButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <VBox fx:id="ContactDetails" alignment="CENTER" focusTraversable="true" minHeight="-Infinity" prefHeight="0.0" prefWidth="280.0" visible="false">
+                     <children>
+                        <Label text="Please Enter Contact Details" />
+                        <HBox>
+                           <children>
+                              <JFXTextField fx:id="ContactFirstNameTextField" prefHeight="25.0" prefWidth="185.0" promptText="Contact First Name" />
+                              <JFXTextField fx:id="ContactLastNameTextField" prefHeight="25.0" prefWidth="185.0" promptText="Contact Last Name" />
+                           </children>
+                        </HBox>
+                        <JFXTextField fx:id="ContactPhoneTextField" promptText="Contact Phone" />
+                        <JFXTextField fx:id="ContactEmailTextField" promptText="Contact Email" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
             <JFXButton fx:id="signUpBtn" onAction="#SignUp" text="Sign Up" />
             <Label fx:id="signUpError" prefHeight="17.0" prefWidth="200.0" />
          </children>

@@ -17,17 +17,30 @@ public abstract class ViewLogic {
 //	//	newWindow(ViewLogic.class.getResource("2.fxml"), stage, false,"Transaction Test",false);
 //		newWindow(ViewLogic.class.getResource("1.fxml"), stage, false,"Transaction Mining",false);
 //		//blocksWindow();
-		mainMenu();
+		LoginScreen();
 	}
 	
 	protected static void mainMenu() {
 		Stage stage = new Stage();
 		newWindow(ViewLogic.class.getResource("MinerMainMenu.fxml"), stage, false,"FlipCoinMining",false);
 		
-		
-		
-		
 	}
+	
+	
+	
+	
+	/**
+	 * login screen 
+	 */
+	protected static void LoginScreen() {
+		Stage stage = new Stage();
+		newWindow(ViewLogic.class.getResource("SignUpLogin.fxml"), stage, false,"FlipCoinMining",false);
+	
+	
+	
+	}
+	
+
 
 	
 
