@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+
+import org.hsqldb.lib.Collection;
 
 import Utils.Consts;
 import Utils.Type;
@@ -165,7 +168,70 @@ public abstract class MinerLogic {
 	}
 	
 	
+	/**
+	 * gets all miner from the system
+	 * @return
+	 */
+	public static ArrayList<Miner> getAllMiners() {
+		ArrayList<Miner> results = new ArrayList<Miner>();
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblMiner");
+					ResultSet rs = stmt.executeQuery();
+
+				while (rs.next()) 
+					results.add(new Miner(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5)));
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return results;
+		
+	}
 	
 	
+	/**
+	 * gets all companies in the system
+	 * @return
+	 */
+	public static ArrayList<Company> getAllCompanys(){
+		HashSet<Company> filter = new HashSet();
+		ArrayList<Company> results = new ArrayList<Company>();
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn.prepareStatement("SELECT tblMiner.Address, tblMiner.MinerName , tblMiner.Password,"
+							+ "tblMiner.Email , tblMiner.digitalProfit , tblCompany.ContactFirstName , tblCompany.ContactLastName ,"
+							+ " tblCompany.Phone , tblCompany.ContactEmail  FROM tblMiner , tblCompany "
+							+ "INNER JOIN tblCompany ON tblMiner.Address = tblCompany.Address ");
+					ResultSet rs = stmt.executeQuery();
+
+				while (rs.next()) 
+					results.add(new Company(rs.getString(1), rs.getString(2), rs.getString(3), 
+							rs.getString(4), rs.getDouble(5),rs.getString(6), rs.getString(7), 
+							rs.getString(8), rs.getString(9)));
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		filter.addAll(results);
+		results.clear();
+		results.addAll(filter);
+		
+		
+		
+		
+		return results;
+		}
 
 }

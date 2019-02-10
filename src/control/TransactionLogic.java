@@ -88,11 +88,9 @@ public abstract class TransactionLogic {
 	 * gets best transactions 
 	 * @return
 	 */
-	public static ArrayList<Pairs> getBestTrans() {
+	public static ArrayList<Pairs> getBestTrans(Block block) {
 		ArrayList<Pairs> results = new ArrayList<>();
-		ArrayList<Block> blocks  = getMinerBlocks( Main.user);
-		Block block = blocks.get(0);
-		System.out.println(block);
+	
 		
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -100,7 +98,7 @@ public abstract class TransactionLogic {
 				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
 			
 					CallableStatement stmt = conn.prepareCall(Consts.SQL_GET_PAIRS);
-					stmt.setInt(1, block.getSize());
+					stmt.setInt(1, block != null ? block.getSize() : Integer.MAX_VALUE);
 					ResultSet rs = stmt.executeQuery(); 
 
 				while (rs.next()) 
@@ -142,27 +140,7 @@ public abstract class TransactionLogic {
 	
 	
 	
-	public static void addProfit(Transaction a , Block b) {
-		try {
-			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall(Consts.UPDATE_PROFIT)) {
 
-				a.wasAddedToBlock();
-
-				stmt.setDouble(1, a.getCommission());
-				stmt.setString(2, b.getOwner());
-
-				stmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		
-	}
 	/**
 	 * adds a transaction to a specific block
 	 * 
@@ -216,9 +194,58 @@ public abstract class TransactionLogic {
 
 	}
 
-	// ================================== help methods
-	// ==================================================
-	private static void newTransaction1(ArrayList<Transaction> transactions) {
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// ================================== help methods ====================================================================================
+	private static void newTransaction1(ArrayList<Transaction> transactions) {// used for  insertNewTransactions
 
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -246,7 +273,7 @@ public abstract class TransactionLogic {
 
 	}
 
-	private static void newTransaction(ArrayList<Transaction> transactions) {
+	private static void newTransaction(ArrayList<Transaction> transactions) {// used for  insertNewTransactions
 
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -274,7 +301,7 @@ public abstract class TransactionLogic {
 
 	}
 
-	private static void update(Block block, Transaction a) {
+	private static void update(Block block, Transaction a) { // used for addToBlock
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -296,7 +323,7 @@ public abstract class TransactionLogic {
 
 	}
 
-	private static void update1(Block block, Transaction a) {
+	private static void update1(Block block, Transaction a) {// used for addToBlock
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -317,5 +344,26 @@ public abstract class TransactionLogic {
 		}
 
 	}
+	
+	private static void addProfit(Transaction a , Block b) {// used for addToBlock
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					CallableStatement stmt = conn.prepareCall(Consts.UPDATE_PROFIT)) {
 
+				a.wasAddedToBlock();
+
+				stmt.setDouble(1, a.getCommission());
+				stmt.setString(2, b.getOwner());
+
+				stmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 }

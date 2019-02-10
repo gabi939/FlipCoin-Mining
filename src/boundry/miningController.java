@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import control.Main;
+import control.Sys;
 import control.TransactionLogic;
 import entity.Block;
 import entity.Pairs;
@@ -67,15 +68,18 @@ public class miningController implements Initializable {
     @FXML
     private Button backBtn;
     
-    private ArrayList<Block> blocks  = TransactionLogic.getMinerBlocks( Main.user);
-	private Block block = blocks.get(0);
+    private ArrayList<Block> blocks ;
+	private Block block;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ArrayList<Block> blocks  = TransactionLogic.getMinerBlocks( Main.user);
-		Block block = blocks.get(0);
-		addressLabel.setText(Main.user.getAddress());
-		blockLabel.setText(block.getBlockAddress());
-		sizeLabel.setText(Integer.toString(block.getSize()));
+		
+		 blocks = TransactionLogic.getMinerBlocks( Sys.user);
+	     block= blocks.isEmpty() ? null : blocks.get(0);
+		
+		
+		addressLabel.setText(Sys.user.getAddress());
+		if(block != null) {blockLabel.setText(block.getBlockAddress());
+		sizeLabel.setText(Integer.toString(block.getSize()));}
 		idCol.setCellValueFactory(new PropertyValueFactory<>("trans1"));
 		idCol2.setCellValueFactory(new PropertyValueFactory<>("trans2"));
 		sizeCol.setCellValueFactory(new PropertyValueFactory<>("size"));
@@ -85,7 +89,7 @@ public class miningController implements Initializable {
 		commisionColT.setCellValueFactory(new PropertyValueFactory<>("commission"));
 
 		
-		transactionsTable.getItems().addAll(FXCollections.observableArrayList(TransactionLogic.getBestTrans()));
+		transactionsTable.getItems().addAll(FXCollections.observableArrayList(TransactionLogic.getBestTrans(block)));
 		transactionsTableT.getItems().addAll(FXCollections.observableArrayList(TransactionLogic.getAllNotExecutedTransactions()));
 	}
 	@FXML
@@ -108,7 +112,7 @@ public class miningController implements Initializable {
 		transactionsTable.getItems().clear();
 		errorLabel.setText("Transaction added to the Block");
 		TransactionLogic.updateBlock(block.getBlockAddress(), blockSize);
-		transactionsTable.getItems().addAll(FXCollections.observableArrayList(TransactionLogic.getBestTrans()));
+		transactionsTable.getItems().addAll(FXCollections.observableArrayList(TransactionLogic.getBestTrans(block)));
 		return true;
 	}
 	@FXML

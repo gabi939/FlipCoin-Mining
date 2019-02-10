@@ -1,49 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="276.0" prefWidth="600.0" stylesheets="@menuStyles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundry.menuController">
-   <children>
-      <Label prefHeight="100.0" prefWidth="600.0" text="FLIP COIN MINER ">
-         <font>
-            <Font size="60.0" />
-         </font>
-         <VBox.margin>
-            <Insets left="50.0" right="60.0" />
-         </VBox.margin>
-      </Label>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+<BorderPane prefHeight="525.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundry.menuController">
+   <center>
+      <SplitPane dividerPositions="0.41379310344827586">
+        <items>
+          <AnchorPane minWidth="160.0" prefHeight="423.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <VBox prefHeight="423.0" prefWidth="170.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox>
+                           <children>
+                              <JFXTextField fx:id="MInerSearch" prefHeight="29.0" prefWidth="81.0" promptText="Search miner">
+                                 <font>
+                                    <Font name="System Italic" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="3.0" />
+                                 </HBox.margin>
+                              </JFXTextField>
+                              <Region prefHeight="25.0" prefWidth="52.0" />
+                              <Label fx:id="minersCountLabel" prefHeight="25.0" prefWidth="159.0" />
+                           </children>
+                        </HBox>
+                        <JFXTreeTableView fx:id="MinerTable" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane SplitPane.resizableWithParent="false">
+               <children>
+                  <VBox layoutX="4.0" prefHeight="423.0" prefWidth="243.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox>
+                           <children>
+                              <JFXTextField fx:id="CompanySearch" prefHeight="25.0" prefWidth="105.0" promptText="Search company">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Region prefHeight="25.0" prefWidth="52.0" />
+                              <Label fx:id="companysCountLabel" prefHeight="25.0" prefWidth="96.0" />
+                           </children>
+                        </HBox>
+                        <JFXTreeTableView fx:id="CompanyTable" prefHeight="399.0" prefWidth="315.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+         <BorderPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </BorderPane.margin>
+      </SplitPane>
+   </center>
+   <bottom>
+      <HBox prefHeight="53.0" prefWidth="711.0" BorderPane.alignment="CENTER">
          <children>
-            <ButtonBar prefHeight="100.0" prefWidth="584.0">
-              <buttons>
-                  <Button fx:id="ieTestBtn" mnemonicParsing="false" onAction="#ieWindow" prefHeight="55.0" text="Import/Export Testing" />
-                  <Button fx:id="addBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addTransWindow" prefHeight="55.0" prefWidth="310.0" text="Add Transactions To Block" />
-              </buttons>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-               <padding>
-                  <Insets left="20.0" right="20.0" />
-               </padding>
-            </ButtonBar>
+            <FlowPane hgap="10.0" prefHeight="43.0" prefWidth="711.0">
+               <children>
+                  <Region prefHeight="50.0" prefWidth="200.0" />
+                  <JFXButton fx:id="SolvingButton" text="Riddle Solving" />
+                  <JFXButton fx:id="addBtn" onAction="#addTransWindow" text="Minning Transactions" />
+               </children>
+            </FlowPane>
          </children>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
       </HBox>
-      <Button fx:id="exitBtn" alignment="CENTER" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="180.0" text="Exit " VBox.vgrow="NEVER">
-         <VBox.margin>
-            <Insets left="210.0" top="20.0" />
-         </VBox.margin>
-      </Button>
-   </children>
-</VBox>
+   </bottom>
+   <top>
+      <VBox prefHeight="91.0" prefWidth="711.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="TOP" prefHeight="51.0" prefWidth="500.0" text="FlipCoin - Mininng" textAlignment="CENTER" underline="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children></HBox>
+            <HBox prefHeight="64.0" prefWidth="711.0">
+               <children>
+                  <GridPane vgap="5.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="80.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="120.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Miner : " GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin></Label>
+                        <Label fx:id="MinerNameLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="MinerDigtaProfit" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label fx:id="ContactLabel" text="Contact Man : " GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Label fx:id="ContactNameLabel" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <Label fx:id="ContactPhoneLabel" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                        <Label fx:id="ContactMailLabel" text="Label" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                        <Label text="Name" underline="true" GridPane.columnIndex="1" />
+                        <Label text="Profit" underline="true" GridPane.columnIndex="2" />
+                        <Label GridPane.columnIndex="3" />
+                        <Label fx:id="ContactNameLabelUp" text="Name" underline="true" GridPane.columnIndex="4" />
+                        <Label fx:id="ContactPhoneLabelUp" text="Phone" underline="true" GridPane.columnIndex="5" />
+                        <Label fx:id="ContactMailLabelUp" text="Email" underline="true" GridPane.columnIndex="6" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </GridPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+</BorderPane>

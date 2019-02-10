@@ -10,10 +10,11 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
-	public static Miner user = null;  
 
 	public static void main(String[] args) {
 		Sys.system = new Sys();
+		
+		//System.out.println(MinerLogic.getAllCompanys());
 		
 		launch(args);
 		
