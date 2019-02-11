@@ -76,7 +76,7 @@
             <FlowPane hgap="10.0" prefHeight="43.0" prefWidth="711.0">
                <children>
                   <Region prefHeight="50.0" prefWidth="200.0" />
-                  <JFXButton fx:id="SolvingButton" text="Riddle Solving" />
+                  <JFXButton fx:id="SolvingButton" onAction="#goToRiddleSolving" text="Riddle Solving" />
                   <JFXButton fx:id="addBtn" onAction="#addTransWindow" text="Minning Transactions" />
                </children>
             </FlowPane>

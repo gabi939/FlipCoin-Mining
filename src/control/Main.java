@@ -19,16 +19,8 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		Sys.system = new Sys();
 		
-		Riddle riddle = new  Riddle(5);
-		
-		riddle.setLevel("Complexed");
-		riddle.setDescription("I love youssi");
-		riddle.setPublishDate(new Date(1993,2,1));
-		riddle.setSolutionFinishTime(new Date(1995,2,1));
-		riddle.setStatus(RiddleStatus.solved);
-		
-		
-		//launch(args);
+		//RiddleLogic.irreleventCheck();
+		launch(args);
 		
 	}
 

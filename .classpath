@@ -10,5 +10,8 @@
 	<classpathentry kind="lib" path="jars/charm-glisten-4.4.1-javadoc.jar"/>
 	<classpathentry kind="lib" path="jars/jfoenix-8.0.8.jar"/>
 	<classpathentry kind="lib" path="jars/json-simple-1.1.1.jar"/>
+	<classpathentry kind="con" path="net.sf.jasperreports.JR_CONTAINER"/>
+	<classpathentry kind="con" path="net.sf.jasperreports.JR_DEPENDENCIES_CONTAINER"/>
+	<classpathentry kind="con" path="com.jaspersoft.server.JRS_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

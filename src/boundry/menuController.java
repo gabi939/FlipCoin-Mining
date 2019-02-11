@@ -51,35 +51,32 @@ public class menuController implements Initializable {
 	@FXML
 	private JFXButton addBtn;
 
+	@FXML
+	private Label MinerNameLabel;
 
 	@FXML
-    private Label MinerNameLabel;
+	private Label MinerDigtaProfit;
 
+	@FXML
+	private Label ContactLabel;
 
-    @FXML
-    private Label MinerDigtaProfit;
+	@FXML
+	private Label ContactNameLabel;
 
-    @FXML
-    private Label ContactLabel;
+	@FXML
+	private Label ContactPhoneLabel;
 
-    @FXML
-    private Label ContactNameLabel;
+	@FXML
+	private Label ContactMailLabel;
 
-    @FXML
-    private Label ContactPhoneLabel;
+	@FXML
+	private Label ContactNameLabelUp;
 
-    @FXML
-    private Label ContactMailLabel;
-    
-    @FXML
-    private Label ContactNameLabelUp;
+	@FXML
+	private Label ContactPhoneLabelUp;
 
-    @FXML
-    private Label ContactPhoneLabelUp;
-
-    @FXML
-    private Label ContactMailLabelUp;
-
+	@FXML
+	private Label ContactMailLabelUp;
 
 	/**
 	 * 
@@ -131,28 +128,26 @@ public class menuController implements Initializable {
 		setMinerTable();
 		setCompanyTable();
 		setLabels();
-		
-		
+
 	}
 
-	
 	/**
 	 * sets the labels of the window
 	 */
 	private void setLabels() {
 		entity.Miner user = Sys.user;
-		
+
 		MinerNameLabel.setText(user.getName());
 		MinerDigtaProfit.setText(Double.toString(user.getDigitalProfit()));
-		
-		
-		if(user instanceof entity.Company) {
-			
+
+		if (user instanceof entity.Company) {
+
 			ContactMailLabel.setText(((entity.Company) user).getContactEmail());
-			ContactNameLabel.setText(((entity.Company) user).getContactFirstName() +  " " +((entity.Company) user).getContactFamilyName());
+			ContactNameLabel.setText(((entity.Company) user).getContactFirstName() + " "
+					+ ((entity.Company) user).getContactFamilyName());
 			ContactPhoneLabel.setText(((entity.Company) user).getContactPhone());
-			
-		}else {
+
+		} else {
 			ContactMailLabel.setVisible(false);
 			ContactMailLabelUp.setVisible(false);
 			ContactNameLabel.setVisible(false);
@@ -161,8 +156,7 @@ public class menuController implements Initializable {
 			ContactPhoneLabelUp.setVisible(false);
 			ContactLabel.setVisible(false);
 		}
-		
-		
+
 	}
 
 	/**
@@ -324,7 +318,8 @@ public class menuController implements Initializable {
 	}
 
 	/**
-	 *takes you  import export of transactions
+	 * takes you import export of transactions
+	 * 
 	 * @param event
 	 */
 	@FXML
@@ -336,9 +331,9 @@ public class menuController implements Initializable {
 
 	}
 
-	
 	/**
 	 * takes you to Mining window
+	 * 
 	 * @param event
 	 */
 	@FXML
@@ -347,6 +342,17 @@ public class menuController implements Initializable {
 		stage.close();
 		ViewLogic.newWindow(ViewLogic.class.getResource("MinerMinning.fxml"), stage, false, "Block Management", false);
 	}
+
+	@FXML
+	void goToRiddleSolving(ActionEvent event) {
+		Stage stage = (Stage) addBtn.getScene().getWindow();
+		stage.close();		
+		ViewLogic.newWindow(ViewLogic.class.getResource("MinerRiddleSolving.fxml"), stage, false, "Riddle Solving", false);
+		
+		
+	}
+
+	
 
 	@FXML
 	private void exit(ActionEvent event) {

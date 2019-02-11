@@ -188,7 +188,7 @@ public final class Riddle {
 	 * 
 	 * @return
 	 */
-	public RiddleLevel getRIddleObject() {
+	public RiddleLevel getLevelRIddleObject() {
 
 		RiddleLevel levelToReturn = null;
 
@@ -197,7 +197,7 @@ public final class Riddle {
 			try {
 				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
 				CallableStatement stmt = conn
-						.prepareCall("UPDATE tblRiddle SET tblRiddle.LevelName = ? WHERE tblRiddle.riddleId = ? ");
+						.prepareCall("SELECT * FROM tblDifficulty WHERE LevelName = ? ");
 
 				stmt.setString(1, level);
 				ResultSet rs = stmt.executeQuery();
