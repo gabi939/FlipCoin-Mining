@@ -1,18 +1,25 @@
 package entity;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Date;
+
+import Exceptions.BlockSizeException;
+import Utils.Consts;
 
 public class Block {
 	private String blockAddress;
 	private String previesblock;
-	private String owner; 
+	private String owner;
 	private Date DateOfCreation;
 	private int size;
-	
+
 	public Block(String blockAddress) {
-		this.blockAddress =blockAddress;
+		this.blockAddress = blockAddress;
 	}
-	
+
 	public Block(String blockAddress, String previesblock, String owner, Date dateOfCreation, int size) {
 		super();
 		this.blockAddress = blockAddress;
@@ -20,11 +27,6 @@ public class Block {
 		this.owner = owner;
 		DateOfCreation = dateOfCreation;
 		this.size = size;
-	}
-	
-	
-	public void setPreviesblock(String previesblock) {
-		this.previesblock = previesblock;
 	}
 
 	public String getBlockAddress() {
@@ -45,9 +47,33 @@ public class Block {
 
 	public int getSize() {
 		return size;
-	}	
-	public void setSize(int size) {
-		this.size = size;
+	}
+
+	public void setSize(int size) throws BlockSizeException {
+
+		try {
+			if(size >= 0)
+				this.size = size;
+			else
+				throw new BlockSizeException("Not enough space");
+
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				CallableStatement stmt = conn
+						.prepareCall("UPDATE tblBlock SET tblBlock.Size = ? WHERE tblBlock.BlockAddress = ? ");
+
+				stmt.setInt(1, size);
+				stmt.setString(2, blockAddress);
+
+				stmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -77,13 +103,7 @@ public class Block {
 
 	@Override
 	public String toString() {
-		return "Block [blockAddress=" + blockAddress + ", previesblock=" + previesblock + ", owner=" + owner
-				+ ", DateOfCreation=" + DateOfCreation + ", size=" + size + "]";
+		return blockAddress;
 	}
 
-	
-	
-	
-	
-		
 }

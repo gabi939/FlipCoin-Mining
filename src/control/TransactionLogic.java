@@ -49,40 +49,7 @@ public abstract class TransactionLogic {
 
 	}
 
-	/**
-	 * gets miner blocks
-	 * 
-	 * @param miner
-	 * @return
-	 */
-	public static ArrayList<Block> getMinerBlocks(Miner miner) {
-		ArrayList<Block> results = new ArrayList<Block>();
-
-		try {
-			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall("{ call getMinersBlocks(?) }")) {
-
-				stmt.setString(1, miner.getAddress());
-
-				ResultSet rs = stmt.executeQuery();
-
-				while (rs.next()) {
-					int i = 1;
-					results.add(new Block(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getDate(i++),
-							rs.getInt(i)));
-				}
-
-				return results;
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return results;
-
-	}
+	
 
 	/**
 	 * gets best transactions 

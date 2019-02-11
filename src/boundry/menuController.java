@@ -236,8 +236,8 @@ public class menuController implements Initializable {
 		CompanyTable.setShowRoot(false);
 		CompanyTable.setEditable(false);
 
-		JFXTextField filterField = new JFXTextField();
-		filterField.textProperty().addListener((o, oldVal, newVal) -> {
+		
+		CompanySearch.textProperty().addListener((o, oldVal, newVal) -> {
 			CompanyTable.setPredicate(user -> user.getValue().Name.get().contains(newVal));
 
 		});

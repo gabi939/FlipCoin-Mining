@@ -27,7 +27,6 @@ public class Company extends Miner{
 	
 	public Company(String address) {
 		super(address);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Company(String address, String name, String password, String email ,double digitalProfit,String contactFirstName,String contactFamilyName, String contactPhone,String contactEmail) {

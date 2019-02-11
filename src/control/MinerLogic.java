@@ -234,4 +234,5 @@ public abstract class MinerLogic {
 		return results;
 		}
 
+	
 }
