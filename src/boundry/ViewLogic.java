@@ -17,7 +17,7 @@ public abstract class ViewLogic {
 //	//	newWindow(ViewLogic.class.getResource("2.fxml"), stage, false,"Transaction Test",false);
 //		newWindow(ViewLogic.class.getResource("1.fxml"), stage, false,"Transaction Mining",false);
 //		//blocksWindow();
-		LoginScreen();
+		RaffleScreen();
 	}
 	
 	protected static void mainMenu() {
@@ -41,7 +41,13 @@ public abstract class ViewLogic {
 	}
 	
 
-
+	protected static void RaffleScreen() {
+		Stage stage = new Stage();
+		newWindow(ViewLogic.class.getResource("MinerRaffleGame.fxml"), stage, false,"FlipCoinMining",false);
+	
+	
+	
+	}
 	
 
 
