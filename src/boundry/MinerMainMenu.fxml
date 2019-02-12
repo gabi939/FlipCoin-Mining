@@ -78,6 +78,7 @@
                   <Region prefHeight="50.0" prefWidth="200.0" />
                   <JFXButton fx:id="SolvingButton" onAction="#goToRiddleSolving" text="Riddle Solving" />
                   <JFXButton fx:id="addBtn" onAction="#addTransWindow" text="Minning Transactions" />
+                  <JFXButton onAction="#goToRaffles" prefHeight="25.0" prefWidth="94.0" text="Join Raffles" />
                </children>
             </FlowPane>
          </children>

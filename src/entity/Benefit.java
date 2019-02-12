@@ -76,6 +76,14 @@ public final class Benefit {
 
 
 	@Override
+	public String toString() {
+		return description;
+	}
+
+
+
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

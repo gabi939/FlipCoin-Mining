@@ -12,7 +12,7 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		Sys.system = new Sys();
 		
-		//System.out.println(RaffleLogic.getAllRaffles());
+		//System.out.println(RaffleLogic.getAllRafflesUserJoined(new Miner("miner1")));
 	
 		launch(args);
 		

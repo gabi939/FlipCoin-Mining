@@ -236,7 +236,6 @@ public class menuController implements Initializable {
 		CompanyTable.setShowRoot(false);
 		CompanyTable.setEditable(false);
 
-		
 		CompanySearch.textProperty().addListener((o, oldVal, newVal) -> {
 			CompanyTable.setPredicate(user -> user.getValue().Name.get().contains(newVal));
 
@@ -346,13 +345,20 @@ public class menuController implements Initializable {
 	@FXML
 	void goToRiddleSolving(ActionEvent event) {
 		Stage stage = (Stage) addBtn.getScene().getWindow();
-		stage.close();		
-		ViewLogic.newWindow(ViewLogic.class.getResource("MinerRiddleSolving.fxml"), stage, false, "Riddle Solving", false);
-		
-		
+		stage.close();
+		ViewLogic.newWindow(ViewLogic.class.getResource("MinerRiddleSolving.fxml"), stage, false, "Riddle Solving",
+				false);
+
 	}
 
-	
+	@FXML
+	void goToRaffles(ActionEvent event) {
+		Stage stage = (Stage) addBtn.getScene().getWindow();
+		stage.close();
+		
+		ViewLogic.newWindow(ViewLogic.class.getResource("MinerRaffleGame.fxml"), stage, false, "Raffles",
+				false);		
+	}
 
 	@FXML
 	private void exit(ActionEvent event) {

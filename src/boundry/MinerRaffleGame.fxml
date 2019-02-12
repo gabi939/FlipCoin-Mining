@@ -2,33 +2,39 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
-<?import com.jfoenix.controls.JFXSnackbar?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="440.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundry.MinerRaffle">
+<AnchorPane prefHeight="451.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundry.MinerRaffle">
    <children>
-      <VBox layoutY="-66.0" prefHeight="266.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutY="-66.0" prefHeight="451.0" prefWidth="565.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <BorderPane prefHeight="459.0" prefWidth="451.0">
-               <center>
-                  <JFXTreeTableView fx:id="RaffleTable" prefHeight="319.0" prefWidth="280.0" BorderPane.alignment="CENTER" />
-               </center>
                <right>
-                  <JFXListView fx:id="BenList" prefHeight="319.0" prefWidth="184.0" BorderPane.alignment="CENTER" />
+                  <VBox prefHeight="269.0" prefWidth="184.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <FlowPane alignment="CENTER" hgap="15.0" prefHeight="69.0" prefWidth="184.0">
+                           <children>
+                              <Label fx:id="RaffleCount" prefHeight="26.0" prefWidth="100.0" text="Raffles joined" underline="true" />
+                           </children>
+                        </FlowPane>
+                        <JFXListView fx:id="BenList" prefHeight="378.0" prefWidth="184.0" />
+                     </children>
+                  </VBox>
                </right>
                <bottom>
                   <HBox prefHeight="43.0" prefWidth="451.0" BorderPane.alignment="CENTER">
                      <children>
-                        <FlowPane alignment="CENTER" hgap="20.0" prefHeight="23.0" prefWidth="451.0">
+                        <FlowPane alignment="CENTER" hgap="20.0" prefHeight="43.0" prefWidth="759.0">
                            <children>
                               <JFXButton onAction="#joinRaffle" text="Join" />
                               <JFXButton onAction="#leaveRaffle" text="Leave" />
@@ -42,18 +48,18 @@
                      <children>
                         <HBox prefHeight="83.0" prefWidth="451.0">
                            <children>
-                              <JFXSnackbar fx:id="snackBar" />
-                              <FlowPane alignment="CENTER" hgap="50.0" prefHeight="64.0" prefWidth="451.0">
+                              <FlowPane alignment="CENTER" hgap="100.0" prefHeight="78.0" prefWidth="849.0">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="221.0" text="Raffles" underline="true" wrapText="true">
+                                    <Region prefHeight="37.0" prefWidth="71.0" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="277.0" text="Raffles" underline="true" wrapText="true">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                        <FlowPane.margin>
-                                          <Insets left="90.0" />
+                                          <Insets />
                                        </FlowPane.margin>
                                     </Label>
                                     <JFXButton onAction="#goBack" prefHeight="25.0" prefWidth="53.0" text="Back" />
@@ -61,24 +67,29 @@
                               </FlowPane>
                            </children>
                         </HBox>
-                        <HBox prefHeight="55.0" prefWidth="451.0">
-                           <children>
-                              <FlowPane alignment="BASELINE_LEFT" hgap="15.0" prefHeight="40.0" prefWidth="469.0">
-                                 <children>
-                                    <JFXTextField />
-                                    <Label prefHeight="31.0" prefWidth="70.0" text="Label" />
-                                    <FlowPane alignment="CENTER" prefHeight="31.0" prefWidth="210.0">
-                                       <children>
-                                          <Label prefHeight="27.0" prefWidth="81.0" text="Label" />
-                                       </children>
-                                    </FlowPane>
-                                 </children>
-                              </FlowPane>
-                           </children>
-                        </HBox>
                      </children>
                   </VBox>
                </top>
+               <center>
+                  <VBox prefHeight="330.0" prefWidth="420.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <FlowPane alignment="CENTER" prefHeight="31.0" prefWidth="210.0">
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="173.0" text="Raffles to join" underline="true" />
+                           </children>
+                        </FlowPane>
+                        <TableView fx:id="tableRaffles" prefHeight="376.0" prefWidth="267.0">
+                          <columns>
+                            <TableColumn fx:id="idColm" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="dateColm" prefWidth="103.0" text="Date" />
+                              <TableColumn fx:id="minerColm" prefWidth="89.0" text="Max Minners" />
+                              <TableColumn fx:id="winColm" prefWidth="137.0" text="Num Winners" />
+                              <TableColumn fx:id="benColm" prefWidth="129.0" text="Num Benefits" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </center>
             </BorderPane>
          </children>
       </VBox>

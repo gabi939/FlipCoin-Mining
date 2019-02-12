@@ -17,7 +17,7 @@ public abstract class ViewLogic {
 //	//	newWindow(ViewLogic.class.getResource("2.fxml"), stage, false,"Transaction Test",false);
 //		newWindow(ViewLogic.class.getResource("1.fxml"), stage, false,"Transaction Mining",false);
 //		//blocksWindow();
-		RaffleScreen();
+		LoginScreen();
 	}
 	
 	protected static void mainMenu() {

@@ -1,142 +1,122 @@
 package boundry;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXSnackbar;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import control.RaffleLogic;
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
+import control.Sys;
+import entity.Raffle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
-public class MinerRaffle implements Initializable {
+public class MinerRaffle implements Initializable{
 
-    @FXML
-    private JFXTreeTableView<Raffle> RaffleTable;
-
-    @FXML
-    private JFXListView<?> BenList;
+  
 
     @FXML
-    private JFXSnackbar snackBar;
+    private JFXListView<Raffle> BenList;
 
-    
-    
-    class Raffle extends RecursiveTreeObject<Raffle>{
-    	IntegerProperty RaffleId;
-    	StringProperty  raffleDate;
-    	IntegerProperty maxMiners;
-    	IntegerProperty numWinners;
-    	IntegerProperty numBenefits;
-    	public Raffle(int RaffleId,Date raffleDate,int maxMiners,int numWinners ,int numBenefits){
-    		
-    		this.RaffleId = new SimpleIntegerProperty(RaffleId);
-    		this.raffleDate = new SimpleStringProperty(raffleDate.toString());
-    		this.maxMiners = new SimpleIntegerProperty(maxMiners);
-    		this.numWinners = new SimpleIntegerProperty(numWinners);
-    		this.numBenefits = new SimpleIntegerProperty(numBenefits);
-    		
-    	}
-    	
-        
-    }
+    @FXML
+    private TableView<Raffle> tableRaffles;
 
-    
-    
-    
-    
+    @FXML
+    private TableColumn<Raffle, Integer> idColm;
+
+    @FXML
+    private TableColumn<Raffle, Date> dateColm;
+
+    @FXML
+    private TableColumn<Raffle, Integer> minerColm;
+
+    @FXML
+    private TableColumn<Raffle, Integer> winColm;
+
+    @FXML
+    private TableColumn<Raffle, Integer> benColm;
+
     
     
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
-    	initTable();
+
+    	setRaffleTable();
+    	setListJoined();
 	}
     
     
-    @SuppressWarnings("unchecked")
-	private void initTable() {
-    	JFXTreeTableColumn<Raffle, Integer> deptColumn = new JFXTreeTableColumn<>("ID");
-    	deptColumn.setPrefWidth(150);
-    	deptColumn.setCellValueFactory((TreeTableColumn.CellDataFeatures<Raffle, Integer> param) ->{
-    	    if(deptColumn.validateValue(param)) return param.getValue().getValue().RaffleId.asObject();
-    	    else return deptColumn.getComputedValue(param);
-    	});
-    	 
-    	JFXTreeTableColumn<Raffle, String> empColumn = new JFXTreeTableColumn<>("Date");
-    	empColumn.setPrefWidth(150);
-    	empColumn.setCellValueFactory((TreeTableColumn.CellDataFeatures<Raffle, String> param) ->{
-    	    if(empColumn.validateValue(param)) return param.getValue().getValue().raffleDate;
-    	    else return empColumn.getComputedValue(param);
-    	});
-    	 
-    	JFXTreeTableColumn<Raffle, Integer> ageColumn = new JFXTreeTableColumn<>("maximum Miners");
-    	ageColumn.setPrefWidth(150);
-    	ageColumn.setCellValueFactory((TreeTableColumn.CellDataFeatures<Raffle, Integer> param) ->{
-    	    if(ageColumn.validateValue(param)) return param.getValue().getValue().maxMiners.asObject();
-    	    else return ageColumn.getComputedValue(param);
-    	});
-    	 
-    	JFXTreeTableColumn<Raffle, Integer> ageColumn1 = new JFXTreeTableColumn<>("number of possible Winners");
-    	ageColumn.setPrefWidth(150);
-    	ageColumn.setCellValueFactory((TreeTableColumn.CellDataFeatures<Raffle, Integer> param) ->{
-    	    if(ageColumn.validateValue(param)) return param.getValue().getValue().numWinners.asObject();
-    	    else return ageColumn.getComputedValue(param);
-    	});
-    	  
-    	JFXTreeTableColumn<Raffle, Integer> ageColumn2 = new JFXTreeTableColumn<>("number of benefits");
-    	ageColumn.setPrefWidth(150);
-    	ageColumn.setCellValueFactory((TreeTableColumn.CellDataFeatures<Raffle, Integer> param) ->{
-    	    if(ageColumn.validateValue(param)) return param.getValue().getValue().numBenefits.asObject();
-    	    else return ageColumn.getComputedValue(param);
-    	});
-    	 
-    	ObservableList<Raffle> raffles = FXCollections.observableArrayList();
-    	for(entity.Raffle temp : RaffleLogic.getAllRaffles())
-    		raffles.add(new Raffle(temp.getRaffleId(), temp.getRaffleDate(), temp.getMaxMiners(), temp.getNumWinners(), temp.getNumBenefits()));
-    	final TreeItem<Raffle> root = new RecursiveTreeItem<Raffle>(raffles, RecursiveTreeObject::getChildren);
+    private void setListJoined() {
+    	BenList.getItems().addAll(RaffleLogic.getAllRafflesUserJoined(Sys.user));
     	
-    	RaffleTable.getColumns().setAll(deptColumn, empColumn, ageColumn, ageColumn1, ageColumn2);
-    	RaffleTable.setRoot(root);
-    	RaffleTable.setShowRoot(false);
-    	RaffleTable.setEditable(false);
     	
+    	
+	}
+
+
+	private void setRaffleTable() {
+		idColm.setCellValueFactory(new PropertyValueFactory<>("RaffleId"));
+		dateColm.setCellValueFactory(new PropertyValueFactory<>("raffleDate"));
+		minerColm.setCellValueFactory(new PropertyValueFactory<>("maxMiners"));
+		winColm.setCellValueFactory(new PropertyValueFactory<>("numWinners"));
+		benColm.setCellValueFactory(new PropertyValueFactory<>("numBenefits"));
+		
+		tableRaffles.getItems().addAll(RaffleLogic.getAllRafflesUserCanJoin(Sys.user));
 	}
 
 
 	@FXML
     void goBack(ActionEvent event) {
+		close();
+    	ViewLogic.mainMenu();
 
     }
 
     @FXML
     void joinRaffle(ActionEvent event) {
-
+    	Raffle raf = tableRaffles.getSelectionModel().getSelectedItem();
+    	if(raf!=null) {
+    		
+    		tableRaffles.getItems().remove(raf);
+    		BenList.getItems().add(raf);
+    		RaffleLogic.addToRaffle(Sys.user, raf);
+    		tableRaffles.refresh();
+    		BenList.refresh();
+    		
+    		
+    		
+    	}
+    		
+    		
+    		
+    		
+    	
+    	
     }
 
     @FXML
     void leaveRaffle(ActionEvent event) {
+    	Raffle raf = BenList.getSelectionModel().getSelectedItem();
+    	if(raf!=null) {
+    		BenList.getItems().remove(raf);
+    		tableRaffles.getItems().add(raf);
+    		RaffleLogic.removeFromRaffle(Sys.user,raf);
+    	}
+    	
 
+    }
+    
+    private void close() {
+    	Stage stage = (Stage) tableRaffles.getScene().getWindow();
+    	stage.close();
+    	
     }
 
 	

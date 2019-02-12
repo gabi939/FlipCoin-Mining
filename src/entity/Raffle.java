@@ -189,8 +189,7 @@ public final class Raffle {
 
 	@Override
 	public String toString() {
-		return "Raffle [RaffleId=" + RaffleId + ", raffleDate=" + raffleDate + ", maxMiners=" + maxMiners
-				+ ", numWinners=" + numWinners + ", numBenefits=" + numBenefits + "]";
+		return "Raffle ID: "+RaffleId;
 	}
 
 	
