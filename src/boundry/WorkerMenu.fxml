@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="467.0" prefWidth="428.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="boundry.WorkerMenu">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="560.0" prefWidth="428.0">
+               <top>
+                  <AnchorPane prefHeight="89.0" prefWidth="428.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox prefHeight="95.0" prefWidth="460.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <FlowPane alignment="CENTER" prefHeight="64.0" prefWidth="428.0">
+                                 <children>
+                                    <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" prefWidth="200.0" text="Worker Menu" textAlignment="CENTER" underline="true">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </FlowPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <VBox prefHeight="378.0" prefWidth="124.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <FlowPane prefHeight="348.0" prefWidth="126.0" vgap="20.0">
+                           <children>
+                              <JFXButton onAction="#goToRaffleMang" prefHeight="45.0" prefWidth="120.0" text="Raffle Mangment" />
+                              <JFXButton onAction="#goToRiddleMang" prefHeight="45.0" prefWidth="120.0" text="Riddle Mangment" />
+                              <JFXButton onAction="#goToLevelMang" prefHeight="45.0" prefWidth="120.0" text="Level Mangment" />
+                              <JFXButton onAction="#goToBenefitMang" prefHeight="45.0" prefWidth="120.0" text="Benefit Mangment" />
+                              <JFXButton onAction="#goToTransMang" prefHeight="45.0" prefWidth="125.0" text="Transactions Export" />
+                           </children>
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+               </left>
+               <center>
+                  <VBox prefHeight="331.0" prefWidth="284.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <ImageView pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </VBox>
+               </center>
+            </BorderPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

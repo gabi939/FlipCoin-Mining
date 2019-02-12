@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.TimerTask;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -26,7 +27,7 @@ import Utils.Consts;
 import Utils.Type;
 import entity.Transaction;
 
-public abstract class Communication {
+public  class Communication {
 
 	
 	/**
@@ -163,4 +164,8 @@ public abstract class Communication {
 			e.printStackTrace();
 		}
 	}
+
+
+
+
 }

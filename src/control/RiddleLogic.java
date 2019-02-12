@@ -135,4 +135,7 @@ public abstract class RiddleLogic {
 		
 		
 	}
+
+
+
 }

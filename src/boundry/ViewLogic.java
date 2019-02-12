@@ -2,11 +2,19 @@ package boundry;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -17,7 +25,8 @@ public abstract class ViewLogic {
 //	//	newWindow(ViewLogic.class.getResource("2.fxml"), stage, false,"Transaction Test",false);
 //		newWindow(ViewLogic.class.getResource("1.fxml"), stage, false,"Transaction Mining",false);
 //		//blocksWindow();
-		LoginScreen();
+		WorkerMenu();
+
 	}
 	
 	protected static void mainMenu() {
@@ -96,5 +105,13 @@ public abstract class ViewLogic {
 				}
 			}
 		});
+	}
+
+	/**
+	 * worker menu
+	 */
+	public static void WorkerMenu() {
+		Stage stage = new Stage();
+		newWindow(ViewLogic.class.getResource("WorkerMenu.fxml"), stage, false, "Worker menu", false);
 	}
 }

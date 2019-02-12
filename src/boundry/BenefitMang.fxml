@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="412.0" prefWidth="391.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundry.WorkerBenefitMang">
+   <children>
+      <VBox layoutY="-148.0" prefHeight="412.0" prefWidth="391.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="418.0" prefWidth="391.0">
+               <center>
+                  <TableView fx:id="table" onMouseClicked="#update" prefHeight="252.0" prefWidth="457.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn fx:id="idColm" prefWidth="146.0" text="ID" />
+                      <TableColumn fx:id="descpColm" prefWidth="244.0" text="Description" />
+                    </columns>
+                  </TableView>
+               </center>
+               <top>
+                  <VBox prefHeight="54.0" prefWidth="391.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="51.0" prefWidth="391.0">
+                           <children>
+                              <Label text="Benefit Mangment" underline="true">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="44.0" prefWidth="391.0">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="158.0" text="Choose a  Benefit to Edit">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Region prefHeight="25.0" prefWidth="147.0" />
+                              <JFXButton onAction="#goBack" prefHeight="25.0" prefWidth="66.0" text="Back" />
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </top>
+               <bottom>
+                  <HBox prefHeight="35.0" prefWidth="391.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <FlowPane alignment="CENTER" hgap="40.0" prefHeight="44.0" prefWidth="627.0">
+                           <children>
+                              <JFXButton onAction="#add" text="Add " />
+                              <JFXButton onAction="#remove" text="Remove" />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </HBox>
+               </bottom>
+            </BorderPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

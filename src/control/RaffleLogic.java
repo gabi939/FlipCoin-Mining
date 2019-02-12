@@ -163,4 +163,76 @@ public abstract class RaffleLogic {
 		}
 		
 	}
+
+	public static int getBenfitCount() {
+		int count = 0;
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn
+						.prepareStatement("SELECT Count(*) FROM tblBenefit");
+			ResultSet rs =	stmt.executeQuery();
+			rs.next();
+			count = rs.getInt(1);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
+
+	public static boolean addBenefit(String answer) {
+		
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("INSERT INTO tblBenefit VALUES (?,?)");
+
+				stmt.setString(2, answer);
+				stmt.setString(1, null);
+
+				stmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+
+		}
+		return true;
+
+	}
+
+	public static void removeBenefit(Benefit ben) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("DELETE FROM tblBenefit WHERE BenefitId = ?");
+
+				stmt.setInt(1, ben.getBenefitId());
+
+				stmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+
+		}
+		
+		
+	}
 }
