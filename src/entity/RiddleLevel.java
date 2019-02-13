@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import Exceptions.RaffleException;
 import Utils.Consts;
 
 /**
@@ -47,8 +48,9 @@ public final class RiddleLevel {
 	/**
 	 * sets the number of the difficulty level
 	 * @param difficulty
+	 * @throws RaffleException 
 	 */
-	public void setDifficulty(int difficulty) {
+	public void setDifficulty(int difficulty) throws RaffleException {
 
 		if (difficulty > 0 && difficulty < 11) {
 			this.difficulty = difficulty;
@@ -71,7 +73,8 @@ public final class RiddleLevel {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-		}
+		}else
+			throw new RaffleException("Invalid Difficulty , needs to be between 1- 10");
 	}
 
 	public int getBlockSize() {
@@ -84,8 +87,9 @@ public final class RiddleLevel {
 	 * sets the block size to be given case riddle is solved
 	 * 
 	 * @param blockSize
+	 * @throws RaffleException 
 	 */
-	public void setBlockSize(int blockSize) {
+	public void setBlockSize(int blockSize) throws RaffleException {
 
 		if (blockSize > 0) {
 			this.blockSize = blockSize;
@@ -106,7 +110,8 @@ public final class RiddleLevel {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-		}
+		}else
+			throw new RaffleException("Invalid size , must be positive number");
 	}
 
 	@Override

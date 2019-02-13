@@ -11,6 +11,7 @@ import Utils.Consts;
 import entity.Benefit;
 import entity.Miner;
 import entity.Raffle;
+import entity.RiddleLevel;
 
 public abstract class RaffleLogic {
 
@@ -234,5 +235,75 @@ public abstract class RaffleLogic {
 		}
 		
 		
+	}
+
+	public static ArrayList<RiddleLevel> getAllLevels() {
+		ArrayList<RiddleLevel> results = new ArrayList<>();
+
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblDifficulty");
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next())
+					results.add(new RiddleLevel(rs.getString(1),rs.getInt(2),rs.getInt(3)));
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+
+	public static void addLevel(RiddleLevel toUpdate) {
+		
+
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("INSERT INTO tblDifficulty VALUES (?, ?, ?)");
+
+				stmt.setInt(3, toUpdate.getBlockSize());
+				stmt.setInt(2, toUpdate.getDifficulty());
+				stmt.setString(1, toUpdate.getName());
+
+				stmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+		}
+
+	}
+
+	public static void removeLevel(RiddleLevel rid) {
+
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("DELETE FROM tblDifficulty WHERE LevelName = ?");
+
+				stmt.setString(1, rid.getName());
+
+				stmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+
+		}
 	}
 }

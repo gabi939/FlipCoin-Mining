@@ -18,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -86,17 +87,20 @@ public class WorkerBenefitMang implements Initializable {
 
 	@FXML
 	void update(MouseEvent event) {
+		if (event.getButton().equals(MouseButton.PRIMARY)) {
+			if (event.getClickCount() == 2) {
+				Benefit ben = table.getSelectionModel().getSelectedItem();
+				if (ben != null) {
 
-		Benefit ben = table.getSelectionModel().getSelectedItem();
-		if (ben != null) {
+					popUp("Update benefit");
 
-			popUp("Update benefit");
+					if (answer != null && !answer.equals("")) {
+						ben.setDescription(answer);
+						table.refresh();
+						table.getSelectionModel().clearSelection();
 
-			if (answer != null && !answer.equals("")) {
-				ben.setDescription(answer);
-				table.refresh();
-				table.getSelectionModel().clearSelection();
-
+					}
+				}
 			}
 		}
 
