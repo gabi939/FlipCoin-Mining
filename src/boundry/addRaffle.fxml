@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="285.0" prefWidth="272.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundry.WorkerAddRaffle">
+   <children>
+      <VBox layoutX="-109.0" layoutY="-82.0" prefHeight="339.0" prefWidth="272.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="448.0" prefWidth="272.0">
+               <top>
+                  <HBox alignment="CENTER" prefHeight="42.0" prefWidth="272.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="idLabel" alignment="CENTER" prefHeight="48.0" prefWidth="148.0" text="Add new Raffle" underline="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Label>
+                     </children>
+                  </HBox>
+               </top>
+               <center>
+                  <GridPane minHeight="-Infinity" prefHeight="228.0" prefWidth="272.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="127.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <FlowPane hgap="40.0" minHeight="-Infinity" prefHeight="43.0" prefWidth="272.0">
+                           <children>
+                              <Label text="Date" />
+                              <JFXDatePicker fx:id="datePick" />
+                           </children>
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </FlowPane>
+                        <FlowPane hgap="40.0" prefHeight="57.0" prefWidth="272.0" GridPane.rowIndex="1">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="68.0" text="max Miners" />
+                              <JFXTextField fx:id="minersText" prefHeight="25.0" prefWidth="127.0" />
+                           </children>
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </FlowPane>
+                        <FlowPane hgap="40.0" prefHeight="91.0" prefWidth="272.0" GridPane.rowIndex="2">
+                           <children>
+                              <Label text="mum Winners" />
+                              <JFXTextField fx:id="winText" prefWidth="127.0" />
+                           </children>
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </FlowPane>
+                        <FlowPane hgap="40.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                           <children>
+                              <Label text="num Benefits" />
+                              <JFXTextField fx:id="benText" prefWidth="127.0" />
+                           </children>
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </FlowPane>
+                     </children>
+                  </GridPane>
+               </center>
+               <bottom>
+                  <HBox alignment="CENTER" prefHeight="46.0" prefWidth="272.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXButton onAction="#confirm" text="Confirm" />
+                     </children>
+                  </HBox>
+               </bottom>
+            </BorderPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

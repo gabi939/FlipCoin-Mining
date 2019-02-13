@@ -1,6 +1,7 @@
 package control;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -306,4 +307,93 @@ public abstract class RaffleLogic {
 
 		}
 	}
+
+	public static Raffle addRaffle(Raffle raf) {
+
+		int index = getLastRaffleRecord();
+		
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("INSERT INTO tblRaffle VALUES (?,?,?,?,?)");
+				
+				stmt.setInt(5, raf.getNumBenefits());
+				stmt.setInt(4, raf.getNumWinners());
+				stmt.setInt(3, raf.getMaxMiners());
+				stmt.setDate(2,new Date(raf.getRaffleDate().getTime()));
+				stmt.setInt(1,index);
+				stmt.executeUpdate();
+
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+		}
+		
+		
+		return new Raffle(index, raf.getRaffleDate(),  raf.getMaxMiners(), raf.getNumWinners(), raf.getNumBenefits());
+		
+	}
+	
+	
+	
+	public static int getLastRaffleRecord() {
+		int amount = 0;
+		
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("SELECT TOP 1 RaffleId FROM tblRaffle ORDER BY RaffleId DESC");
+			
+				ResultSet rs = stmt.executeQuery();
+				rs.next();
+
+				amount = rs.getInt(1);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+		}
+		
+		return amount+1;
+		
+		
+	}
+
+	public static void removeRaffle(Raffle raf) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("DELETE FROM tblRaffle WHERE RaffleId = ?");
+
+				stmt.setInt(1, raf.getRaffleId());
+
+				stmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
 }
