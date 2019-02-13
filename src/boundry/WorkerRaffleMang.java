@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import control.RaffleLogic;
 import entity.Raffle;
-import javafx.animation.SequentialTransitionBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

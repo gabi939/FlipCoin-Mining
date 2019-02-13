@@ -13,6 +13,7 @@ import Utils.Consts;
 import Utils.RiddleStatus;
 import entity.Miner;
 import entity.Riddle;
+import entity.RiddleLevel;
 
 public abstract class RiddleLogic {
 
@@ -134,6 +135,133 @@ public abstract class RiddleLogic {
 		}
 		
 		
+	}
+
+
+	public static ArrayList<Riddle> getAllRiddle() {
+		ArrayList<Riddle> results = new ArrayList<>();
+
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn
+						.prepareStatement("SELECT * FROM tblRiddle");
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next())
+					results.add(new Riddle(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getDate(4),
+							RiddleStatus.valueOf(rs.getString(5)), rs.getString(6)));
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+
+
+	public static void removeRiddle(Riddle rid) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("DELETE FROM tblRiddle WHERE riddleId = ?");
+
+				stmt.setInt(1, rid.getRiddleId());
+
+				stmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+
+		}
+	}
+
+
+	public static ArrayList<RiddleLevel> getAllLevels() {
+		ArrayList<RiddleLevel> results = new ArrayList<>();
+
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn
+						.prepareStatement("SELECT * FROM tblDifficulty");
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next())
+					results.add(new RiddleLevel(rs.getString(1), rs.getInt(2), rs.getInt(3)));
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+
+
+	public static Integer getLastRiddle() {
+	int amount = 0;
+		
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("SELECT TOP 1 tblRiddle FROM tblRaffle ORDER BY riddleId DESC");
+			
+				ResultSet rs = stmt.executeQuery();
+				rs.next();
+
+				amount = rs.getInt(1);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+		}
+		
+		return amount+1;
+	}
+
+
+	public static void addRiddle(Riddle rid) {
+		
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("INSERT INTO tblRiddle VALUES (?,?,?,?,?,?)");
+				
+				stmt.setInt(1, rid.getRiddleId());
+				stmt.setString(3, rid.getDescription());
+				stmt.setString(5, rid.getStatus().toString());
+				stmt.setString(6, rid.getLevel());
+				stmt.setDate(2,new Date(rid.getPublishDate().getTime()) );
+				stmt.setDate(4, new Date(rid.getSolutionFinishTime().getTime()));
+
+
+				stmt.executeUpdate();
+				
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+		}		
 	}
 
 

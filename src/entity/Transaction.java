@@ -42,6 +42,16 @@ public class Transaction {
 	}
 	
 	
+	public Transaction(String iD, double size, Type type, double commission, String blockAddress, Date additionTime) {
+		super();
+		ID = iD;
+		this.size = size;
+		this.type = type;
+		this.commission = commission;
+		this.blockAddress = blockAddress;
+		this.additionTime = additionTime;
+	}
+
 	public void wasAddedToBlock() {
 		additionTime = new Date( new java.util.Date().getTime());
 	}

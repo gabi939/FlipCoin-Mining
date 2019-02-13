@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="423.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundry.WorkerTransMang">
+   <children>
+      <VBox layoutY="-148.0" prefHeight="412.0" prefWidth="391.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="418.0" prefWidth="391.0">
+               <top>
+                  <VBox prefHeight="54.0" prefWidth="391.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="51.0" prefWidth="391.0">
+                           <children>
+                              <Label text="Transaction Mangment" underline="true">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="44.0" prefWidth="391.0">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="158.0">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Region prefHeight="25.0" prefWidth="235.0" />
+                              <JFXButton onAction="#goBack" prefHeight="25.0" prefWidth="66.0" text="Back" />
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </top>
+               <bottom>
+                  <HBox prefHeight="35.0" prefWidth="391.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <FlowPane alignment="CENTER_RIGHT" hgap="40.0" prefHeight="44.0" prefWidth="627.0">
+                           <children>
+                              <JFXButton onAction="#export" prefHeight="25.0" prefWidth="127.0" text="Export Transaction " />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </HBox>
+               </bottom>
+               <center>
+                  <TableView fx:id="table" prefHeight="320.0" prefWidth="485.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn fx:id="idColm" prefWidth="104.0" text="ID" />
+                      <TableColumn fx:id="sizeColm" prefWidth="91.0" text="Size" />
+                        <TableColumn fx:id="comColm" minWidth="0.0" prefWidth="81.0" text="Commission" />
+                        <TableColumn fx:id="blockColm" minWidth="0.0" prefWidth="100.0" text="Block Address" />
+                        <TableColumn fx:id="addColm" prefWidth="108.0" text="AdditionTime" />
+                    </columns>
+                  </TableView>
+               </center>
+            </BorderPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

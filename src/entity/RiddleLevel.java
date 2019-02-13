@@ -139,4 +139,9 @@ public final class RiddleLevel {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return  name;
+	}
+
 }
