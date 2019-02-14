@@ -174,7 +174,6 @@ public abstract class TransactionLogic {
 				PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblTransaction");
 				ResultSet rs = stmt.executeQuery();
 
-				int i = 1;
 				while (rs.next())
 					results.add(new Transaction(rs.getString(1), rs.getInt(2), 
 							Type.valueOf(rs.getString(3)), rs.getInt(4), rs.getString(5),rs.getDate(6)));
@@ -188,6 +187,33 @@ public abstract class TransactionLogic {
 		return results;
 
 	}
+	
+	
+	public static ArrayList<Transaction> getAllNotExported(){
+		ArrayList<Transaction> results = new ArrayList<>();
+
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblTransaction WHERE exported = true");
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next())
+					results.add(new Transaction(rs.getString(1), rs.getInt(2), 
+							Type.valueOf(rs.getString(3)), rs.getInt(4), rs.getString(5),rs.getDate(6)));
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return results;
+
+	}
+	
+	
 	
 	
 	

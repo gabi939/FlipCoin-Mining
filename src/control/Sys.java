@@ -15,7 +15,7 @@ public final class Sys {
 	
 	public Sys() throws UnsupportedEncodingException  {
 		super();
-		Communication.receiveJSON();
+		
 
 		
 		

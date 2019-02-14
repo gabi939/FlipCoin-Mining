@@ -5,7 +5,9 @@ import java.net.URLDecoder;
 public class Consts {
 	
 	protected static final String DB_FILEPATH = getDBPath();
-	public static final String CONN_STR = "jdbc:ucanaccess://" + DB_FILEPATH + ";COLUMNORDER=DISPLAY";
+	public static final String CONN_STR = "jdbc:ucanaccess://" + DB_FILEPATH + ";COL"
+			+ ""
+			+ "UMNORDER=DISPLAY";
 
 	
 	//=========================================== Transactions Query =================================================

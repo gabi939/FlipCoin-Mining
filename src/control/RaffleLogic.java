@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import Utils.Consts;
 import entity.Benefit;
 import entity.Miner;
+import entity.PartData;
 import entity.Raffle;
 import entity.RiddleLevel;
 
@@ -69,6 +70,61 @@ public abstract class RaffleLogic {
 
 	}
 
+	public static ArrayList<Raffle> getAllNotPlayedRaffles(){
+		ArrayList<Raffle> played = new ArrayList<>();
+		ArrayList<Raffle> notPlayed = new ArrayList<>();
+		
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("SELECT RaffleId FROM tblWinners");
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next())
+					played.add(new Raffle(rs.getInt(1)));
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblRaffle");
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next())
+					notPlayed.add(new Raffle(rs.getInt(1), rs.getDate(2), rs.getInt(3), rs.getInt(4), rs.getInt(5)));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		
+		notPlayed.removeAll(played);
+		
+		
+		return notPlayed;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static ArrayList<Benefit> getAllBenefits() {
 		ArrayList<Benefit> results = new ArrayList<>();
 
@@ -124,8 +180,8 @@ public abstract class RaffleLogic {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try {
 				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-				PreparedStatement stmt = conn
-						.prepareStatement("SELECT * FROM tblRaffle INNER JOIN tblParticipation ON tblRaffle.RaffleId = tblParticipation.RaffleId WHERE tblParticipation.Address = ? AND  won = false");
+				PreparedStatement stmt = conn.prepareStatement(
+						"SELECT * FROM tblRaffle INNER JOIN tblParticipation ON tblRaffle.RaffleId = tblParticipation.RaffleId WHERE tblParticipation.Address = ? AND  won = false");
 
 				stmt.setString(1, miner.getAddress());
 				ResultSet rs = stmt.executeQuery();
@@ -139,7 +195,7 @@ public abstract class RaffleLogic {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		return results;
 
 	}
@@ -163,7 +219,7 @@ public abstract class RaffleLogic {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public static int getBenfitCount() {
@@ -172,11 +228,10 @@ public abstract class RaffleLogic {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try {
 				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-				PreparedStatement stmt = conn
-						.prepareStatement("SELECT Count(*) FROM tblBenefit");
-			ResultSet rs =	stmt.executeQuery();
-			rs.next();
-			count = rs.getInt(1);
+				PreparedStatement stmt = conn.prepareStatement("SELECT Count(*) FROM tblBenefit");
+				ResultSet rs = stmt.executeQuery();
+				rs.next();
+				count = rs.getInt(1);
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -184,12 +239,12 @@ public abstract class RaffleLogic {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		return count;
 	}
 
 	public static boolean addBenefit(String answer) {
-		
+
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try {
@@ -207,7 +262,6 @@ public abstract class RaffleLogic {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-
 
 		}
 		return true;
@@ -232,10 +286,8 @@ public abstract class RaffleLogic {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 
-
 		}
-		
-		
+
 	}
 
 	public static ArrayList<RiddleLevel> getAllLevels() {
@@ -249,7 +301,7 @@ public abstract class RaffleLogic {
 				ResultSet rs = stmt.executeQuery();
 
 				while (rs.next())
-					results.add(new RiddleLevel(rs.getString(1),rs.getInt(2),rs.getInt(3)));
+					results.add(new RiddleLevel(rs.getString(1), rs.getInt(2), rs.getInt(3)));
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -261,7 +313,6 @@ public abstract class RaffleLogic {
 	}
 
 	public static void addLevel(RiddleLevel toUpdate) {
-		
 
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -304,28 +355,26 @@ public abstract class RaffleLogic {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 
-
 		}
 	}
 
 	public static Raffle addRaffle(Raffle raf) {
 
 		int index = getLastRaffleRecord();
-		
+
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try {
 				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
 				PreparedStatement stmt = conn.prepareStatement("INSERT INTO tblRaffle VALUES (?,?,?,?,?)");
-				
+
 				stmt.setInt(5, raf.getNumBenefits());
 				stmt.setInt(4, raf.getNumWinners());
 				stmt.setInt(3, raf.getMaxMiners());
-				stmt.setDate(2,new Date(raf.getRaffleDate().getTime()));
-				stmt.setInt(1,index);
+				stmt.setDate(2, new Date(raf.getRaffleDate().getTime()));
+				stmt.setInt(1, index);
 				stmt.executeUpdate();
 
-				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -333,28 +382,26 @@ public abstract class RaffleLogic {
 			e.printStackTrace();
 
 		}
-		
-		
-		return new Raffle(index, raf.getRaffleDate(),  raf.getMaxMiners(), raf.getNumWinners(), raf.getNumBenefits());
-		
+
+		return new Raffle(index, raf.getRaffleDate(), raf.getMaxMiners(), raf.getNumWinners(), raf.getNumBenefits());
+
 	}
-	
-	
-	
+
 	public static int getLastRaffleRecord() {
 		int amount = 0;
-		
+
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try {
 				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-				PreparedStatement stmt = conn.prepareStatement("SELECT TOP 1 RaffleId FROM tblRaffle ORDER BY RaffleId DESC");
-			
+				PreparedStatement stmt = conn
+						.prepareStatement("SELECT TOP 1 RaffleId FROM tblRaffle ORDER BY RaffleId DESC");
+
 				ResultSet rs = stmt.executeQuery();
 				rs.next();
 
 				amount = rs.getInt(1);
-				
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -362,10 +409,9 @@ public abstract class RaffleLogic {
 			e.printStackTrace();
 
 		}
-		
-		return amount+1;
-		
-		
+
+		return amount + 1;
+
 	}
 
 	public static void removeRaffle(Raffle raf) {
@@ -386,14 +432,98 @@ public abstract class RaffleLogic {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 
-
 		}
+
+	}
+
+	public static ArrayList<PartData> getAllParticipants(Raffle rif) {
+		ArrayList<PartData> results = new ArrayList<>();
+
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblParticipation WHERE RaffleId = ?");
+				stmt.setInt(1, rif.getRaffleId());
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next())
+					results.add(new PartData(rs.getInt(1), rs.getString(2), rs.getBoolean(3)));
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return results;
+
+	}
+
+	public static void addToWinners(Raffle raffle, ArrayList<Miner> winners) {
+
+		int rafID = raffle.getRaffleId();
+		int amountPrizes = raffle.getNumBenefits();
+
+		
+		for(Miner temp : winners)
+			addWinner(rafID, temp.getAddress(), amountPrizes);
+		
+		
+		
+		
 		
 	}
-	
-	
-	
-	
-	
-	
+
+	private static void addWinner(int rafID, String address, int amountPrizes) {
+
+		for (int i = 0; i < amountPrizes; i++) {
+
+			int keyPrize = 0;
+			try {
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				try {
+					Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn
+							.prepareStatement("SELECT TOP 1 BenefitId FROM tblBenefit ORDER BY  RND(BenefitId);");
+
+					ResultSet rs = stmt.executeQuery();
+					rs.next();
+
+					keyPrize = rs.getInt(1);
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+
+			}
+				
+			try {
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				try {
+					Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn.prepareStatement("INSERT INTO tblWinners VALUES (?,?,?)");
+
+			
+					stmt.setInt(3, keyPrize);
+					stmt.setString(2, address);
+					stmt.setInt(1, rafID);
+					stmt.executeUpdate();
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+
+			}
+			
+			
+		}
+		
+		
+	}
+
 }

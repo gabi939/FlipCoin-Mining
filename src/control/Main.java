@@ -13,8 +13,7 @@ public class Main extends Application {
 	public static void main(String[] args) throws UnsupportedEncodingException  {
 		Sys.system = new Sys();
 		
-		//System.out.println(TransactionLogic.getAllTrans());
-		
+		//Communication.receiveRiddles();
 		launch(args);
 		
 	}

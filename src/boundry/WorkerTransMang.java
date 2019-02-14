@@ -60,6 +60,13 @@ public class WorkerTransMang implements Initializable{
     	ViewLogic.WorkerMenu();
 
     }
+    
+    @FXML
+    void importTrans(ActionEvent event) throws UnsupportedEncodingException {
+    	Communication.receiveJSON();
+    	table.getItems().setAll(TransactionLogic.getAllNotExecutedTransactions());
+
+    }
 
   
 

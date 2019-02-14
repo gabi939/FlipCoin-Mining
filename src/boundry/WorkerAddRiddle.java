@@ -42,6 +42,8 @@ public class WorkerAddRiddle implements Initializable{
     @FXML
     void confirm(ActionEvent event) {
 
+    	
+    	Riddle rid = WorkerRiddleMang.toUpdate;
     	Date publish =  Date.from(publishPick.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
     	Date finish =  Date.from(finishPick.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
     	RiddleLevel lvl = lvlCombo.getSelectionModel().getSelectedItem();
@@ -51,9 +53,12 @@ public class WorkerAddRiddle implements Initializable{
     	if(publish.before(finish)) {
     		if(decp != null && !decp.equals("")) {
     		
-    		Riddle rid = new Riddle(RiddleLogic.getLastRiddle(), publish, decp, finish, RiddleStatus.solvable, lvl.getName());
-    		
-    		RiddleLogic.addRiddle(rid);
+    			rid.setLevel(lvl.getName());
+    			rid.setPublishDate(publish);
+    			rid.setSolutionFinishTime(finish);
+    			rid.setStatus(RiddleStatus.solvable);
+    			WorkerRiddleMang.toUpdate = null;
+    			WorkerRiddleMang.workerRiddleMang.table.refresh();
     		Stage stage = (Stage) errorLabel.getScene().getWindow();
     		stage.close();
     		
@@ -62,7 +67,7 @@ public class WorkerAddRiddle implements Initializable{
 
     		
     	}else
-    		errorLabel.setText("");
+    		errorLabel.setText("cant start before finish");
     }
 
 	@Override
@@ -71,6 +76,10 @@ public class WorkerAddRiddle implements Initializable{
 		lvlCombo.getSelectionModel().select(0);
 		finishPick.setValue(LocalDate.now());
 		publishPick.setValue(LocalDate.now());
+		decpText.setDisable(true);
+		idLabel.setText("Update Riddle "+WorkerRiddleMang.toUpdate.getRiddleId());
+		decpText.setText(WorkerRiddleMang.toUpdate.getDescription());
+		
 	}
 
 }

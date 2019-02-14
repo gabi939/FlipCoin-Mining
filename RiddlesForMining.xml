@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<RidNSols>
+	<Riddles>
+		<Riddle>
+			<RiddleNum>6</RiddleNum>
+			<Description>"1*1"</Description>
+		</Riddle>
+		<Riddle>
+			<RiddleNum>7</RiddleNum>
+			<Description>"1*2"</Description>
+		</Riddle>
+		<Riddle>
+			<RiddleNum>8</RiddleNum>
+			<Description>"1*3"</Description>
+		</Riddle>
+
+	</Riddles>
+
+	<Solutions>
+		<Solution>
+			<RiddleNum>6</RiddleNum>
+			<SolutionNum>1</SolutionNum>
+			<Result>"1"</Result>
+		</Solution>
+		<Solution>
+			<RiddleNum>7</RiddleNum>
+			<SolutionNum>1</SolutionNum>
+			<Result>"2" </Result>
+		</Solution>
+		<Solution>
+			<RiddleNum>8</RiddleNum>
+			<SolutionNum>1</SolutionNum>
+			<Result>"3"</Result>
+		</Solution>
+		<Solution>
+			<RiddleNum>8</RiddleNum>
+			<SolutionNum>2</SolutionNum>
+			<Result>"3"</Result>
+		</Solution>
+
+	</Solutions>
+</RidNSols>

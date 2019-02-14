@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="528.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundry.WorkerPlayRaffle">
+   <children>
+      <VBox layoutX="-47.0" layoutY="-116.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="552.0" prefWidth="334.0">
+               <top>
+                  <VBox BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox prefHeight="44.0" prefWidth="405.0">
+                           <children>
+                              <FlowPane alignment="CENTER" prefHeight="76.0" prefWidth="431.0">
+                                 <children>
+                                    <Label prefHeight="51.0" prefWidth="188.0" text="Raffle Game" underline="true">
+                                       <font>
+                                          <Font size="35.0" />
+                                       </font>
+                                       <FlowPane.margin>
+                                          <Insets left="25.0" />
+                                       </FlowPane.margin>
+                                    </Label>
+                                 </children>
+                              </FlowPane>
+                           </children>
+                        </HBox>
+                        <GridPane hgap="5.0" prefHeight="178.0" prefWidth="334.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <FlowPane hgap="25.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="ID" underline="true" />
+                                    <JFXTextField fx:id="idText" disable="true" prefHeight="25.0" prefWidth="132.0" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </FlowPane>
+                              <FlowPane hgap="25.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label text="Miners" underline="true" />
+                                    <JFXTextField fx:id="minerText" disable="true" prefHeight="25.0" prefWidth="111.0" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </FlowPane>
+                              <FlowPane hgap="25.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="Date" underline="true" />
+                                    <JFXDatePicker fx:id="pick" disable="true" prefHeight="25.0" prefWidth="140.0" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </FlowPane>
+                              <FlowPane hgap="25.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="Winners" underline="true" />
+                                    <JFXTextField fx:id="winText" disable="true" prefHeight="25.0" prefWidth="122.0" unFocusColor="#141414" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </FlowPane>
+                              <FlowPane hgap="25.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label text="Benefits" underline="true" />
+                                    <JFXTextField fx:id="benText" disable="true" prefHeight="25.0" prefWidth="124.0" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </FlowPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </top>
+               <center>
+                  <VBox BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="150.0" prefWidth="405.0">
+                           <children>
+                              <Label text="Double click miner to un/make them winners" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <TableView fx:id="table" onMouseClicked="#updateWinner" prefHeight="344.0" prefWidth="334.0">
+                          <columns>
+                            <TableColumn fx:id="addColm" prefWidth="254.0" text="Address" />
+                              <TableColumn fx:id="winnerColm" prefWidth="150.0" text="Winner" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </center>
+            </BorderPane>
+            <HBox alignment="CENTER" prefHeight="127.0" prefWidth="405.0" spacing="80.0">
+               <children>
+                  <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="157.0" />
+                  <JFXButton onAction="#rewardWinner" text="Reward winners" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

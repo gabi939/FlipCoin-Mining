@@ -151,7 +151,7 @@ public abstract class RiddleLogic {
 
 				while (rs.next())
 					results.add(new Riddle(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getDate(4),
-							RiddleStatus.valueOf(rs.getString(5)), rs.getString(6)));
+							rs.getString(5)!=null?RiddleStatus.valueOf(rs.getString(5)):null, rs.getString(6)));
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -242,14 +242,55 @@ public abstract class RiddleLogic {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try {
 				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+			
+				if(rid.getPublishDate() != null){
+				
 				PreparedStatement stmt = conn.prepareStatement("INSERT INTO tblRiddle VALUES (?,?,?,?,?,?)");
 				
 				stmt.setInt(1, rid.getRiddleId());
 				stmt.setString(3, rid.getDescription());
+				
 				stmt.setString(5, rid.getStatus().toString());
 				stmt.setString(6, rid.getLevel());
 				stmt.setDate(2,new Date(rid.getPublishDate().getTime()) );
 				stmt.setDate(4, new Date(rid.getSolutionFinishTime().getTime()));
+				stmt.executeUpdate();
+
+				}else {
+
+					PreparedStatement stmt = conn.prepareStatement("INSERT INTO tblRiddle (riddleId,Description) VALUES (?,?)");
+					
+					stmt.setInt(1, rid.getRiddleId());
+					stmt.setString(2, rid.getDescription());
+					
+					stmt.executeUpdate();
+
+				}
+
+				
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+		}		
+	}
+
+
+	public static void addSoution(int parseInt, int parseInt2, String textContent) {
+		
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try {
+				Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+				PreparedStatement stmt = conn.prepareStatement("INSERT INTO tbSolution VALUES (?,?,?)");
+				
+				stmt.setInt(2, parseInt);
+				stmt.setInt(1, parseInt2);
+				stmt.setString(3,textContent);
+			
 
 
 				stmt.executeUpdate();
@@ -263,6 +304,9 @@ public abstract class RiddleLogic {
 
 		}		
 	}
+
+
+
 
 
 

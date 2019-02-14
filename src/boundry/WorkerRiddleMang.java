@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import Utils.RiddleStatus;
+import control.Communication;
 import control.RiddleLogic;
 import entity.Riddle;
 import javafx.event.ActionEvent;
@@ -20,7 +21,7 @@ import javafx.stage.Stage;
 public class WorkerRiddleMang implements Initializable {
 
 	@FXML
-	private TableView<Riddle> table;
+	public TableView<Riddle> table;
 
 	@FXML
 	private TableColumn<Riddle, Integer> idColm;
@@ -39,10 +40,15 @@ public class WorkerRiddleMang implements Initializable {
 
 	@FXML
 	private TableColumn<Riddle, String> lvlColm;
+	
+	public static WorkerRiddleMang workerRiddleMang;
+	
+	public static Riddle toUpdate;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setTable();
+		workerRiddleMang = this;
 	}
 
 	private void setTable() {
@@ -60,7 +66,8 @@ public class WorkerRiddleMang implements Initializable {
 	@FXML
 	void add(ActionEvent event) {
 
-		ViewLogic.newWindow(ViewLogic.class.getResource("addRiddle.fxml"), new Stage(), false, "Add Riddle", false);
+			Communication.receiveRiddles();
+			table.getItems().setAll(RiddleLogic.getAllRiddle());
 	}
 
 	@FXML
@@ -82,11 +89,14 @@ public class WorkerRiddleMang implements Initializable {
 
 	@FXML
 	void update(MouseEvent event) {
+		
+		Riddle rid = table.getSelectionModel().getSelectedItem();
 
 		if (event.getButton().equals(MouseButton.PRIMARY)) {
-			if (event.getClickCount() == 2) {
-
-				
+			if (event.getClickCount() == 2) 
+				if(rid!=null){
+				ViewLogic.newWindow(ViewLogic.class.getResource("addRiddle.fxml"), new Stage(), false, "Add Riddle", false);
+				toUpdate = rid;
 				
 				
 				

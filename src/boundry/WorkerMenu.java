@@ -44,6 +44,21 @@ public class WorkerMenu {
     	ViewLogic.newWindow(ViewLogic.class.getResource("TransMang.fxml"), new Stage(), false, "", false);
     }
     
+    @FXML
+    void goToGame(ActionEvent event) {
+    	close();
+    	ViewLogic.newWindow(ViewLogic.class.getResource("RaffleGame.fxml"), new Stage(), false, "", false);
+
+    }
+    
+    @FXML
+    void logout(ActionEvent event) {
+    	close();
+    	ViewLogic.LoginScreen();
+    	
+
+    }
+    
     
     private void close() {
     	
