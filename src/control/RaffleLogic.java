@@ -66,14 +66,45 @@ public abstract class RaffleLogic {
 		}
 
 		raffles.removeAll(results);
+
+		ArrayList<Raffle> quack = new ArrayList<>(raffles);
+		
+		for (Raffle temp : quack) {
+
+			int part = 0;
+			try {
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				try {
+					Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn
+							.prepareStatement("SELECT Count(Address) FROM tblParticipation WHERE RaffleId = ?");
+
+					stmt.setInt(1, temp.getRaffleId());
+					ResultSet rs = stmt.executeQuery();
+
+					rs.next();
+					part = rs.getInt(1);
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+			if(part>= temp.getMaxMiners())
+				raffles.remove(temp);
+
+		}
+
 		return raffles;
 
 	}
 
-	public static ArrayList<Raffle> getAllNotPlayedRaffles(){
+	public static ArrayList<Raffle> getAllNotPlayedRaffles() {
 		ArrayList<Raffle> played = new ArrayList<>();
 		ArrayList<Raffle> notPlayed = new ArrayList<>();
-		
+
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try {
@@ -91,7 +122,6 @@ public abstract class RaffleLogic {
 			e.printStackTrace();
 		}
 
-		
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try {
@@ -107,24 +137,13 @@ public abstract class RaffleLogic {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		notPlayed.removeAll(played);
-		
-		
+
 		return notPlayed;
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	public static ArrayList<Benefit> getAllBenefits() {
 		ArrayList<Benefit> results = new ArrayList<>();
 
@@ -465,14 +484,9 @@ public abstract class RaffleLogic {
 		int rafID = raffle.getRaffleId();
 		int amountPrizes = raffle.getNumBenefits();
 
-		
-		for(Miner temp : winners)
+		for (Miner temp : winners)
 			addWinner(rafID, temp.getAddress(), amountPrizes);
-		
-		
-		
-		
-		
+
 	}
 
 	private static void addWinner(int rafID, String address, int amountPrizes) {
@@ -499,14 +513,13 @@ public abstract class RaffleLogic {
 				e.printStackTrace();
 
 			}
-				
+
 			try {
 				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 				try {
 					Connection conn = DriverManager.getConnection(Consts.CONN_STR);
 					PreparedStatement stmt = conn.prepareStatement("INSERT INTO tblWinners VALUES (?,?,?)");
 
-			
 					stmt.setInt(3, keyPrize);
 					stmt.setString(2, address);
 					stmt.setInt(1, rafID);
@@ -519,11 +532,9 @@ public abstract class RaffleLogic {
 				e.printStackTrace();
 
 			}
-			
-			
+
 		}
-		
-		
+
 	}
 
 }

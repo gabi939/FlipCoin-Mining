@@ -359,10 +359,20 @@ public class menuController implements Initializable {
 		ViewLogic.newWindow(ViewLogic.class.getResource("MinerRaffleGame.fxml"), stage, false, "Raffles",
 				false);		
 	}
+    @FXML
+    void marketPrediction(ActionEvent event) {
+
+    }
+    
+
+  
 
 	@FXML
 	private void exit(ActionEvent event) {
+
 		Stage stage = (Stage) addBtn.getScene().getWindow();
 		stage.close();
+		Sys.user=null;
+		ViewLogic.LoginScreen();
 	}
 }

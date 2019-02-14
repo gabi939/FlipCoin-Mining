@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.jar.JarException;
+
+import javax.swing.JFrame;
 
 import Utils.Consts;
 import Utils.Type;
@@ -15,6 +18,10 @@ import entity.Miner;
 import entity.Pairs;
 import entity.Raffle;
 import entity.Transaction;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
 
 public abstract class TransactionLogic {
 
@@ -105,6 +112,26 @@ public abstract class TransactionLogic {
 		
 		
 	}
+	
+	
+	public static JFrame createReport() throws SQLException, JarException, ClassNotFoundException, JRException {
+		Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+		try (Connection conn = DriverManager.getConnection(Consts.CONN_STR)) {
+			JasperPrint print = JasperFillManager
+					.fillReport(TransactionLogic.class.getResourceAsStream("/Model/TransactionsReport.jasper"), null, conn);
+			JFrame frame = new JFrame("Customer Orders Report");
+			frame.getContentPane().add(new JRViewer(print));
+			frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			frame.pack();
+			return frame;
+		}
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

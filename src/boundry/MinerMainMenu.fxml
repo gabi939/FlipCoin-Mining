@@ -75,10 +75,11 @@
          <children>
             <FlowPane hgap="10.0" prefHeight="43.0" prefWidth="711.0">
                <children>
-                  <Region prefHeight="50.0" prefWidth="200.0" />
-                  <JFXButton fx:id="SolvingButton" onAction="#goToRiddleSolving" text="Riddle Solving" />
-                  <JFXButton fx:id="addBtn" onAction="#addTransWindow" text="Minning Transactions" />
-                  <JFXButton onAction="#goToRaffles" prefHeight="25.0" prefWidth="94.0" text="Join Raffles" />
+                  <Region prefHeight="50.0" prefWidth="112.0" />
+                  <JFXButton onAction="#marketPrediction" prefHeight="25.0" prefWidth="118.0" style="-jfx-button-type:: RAISED;" text="Market Prediction" />
+                  <JFXButton fx:id="SolvingButton" onAction="#goToRiddleSolving" style="-jfx-button-type:: RAISED;" text="Riddle Solving" />
+                  <JFXButton fx:id="addBtn" onAction="#addTransWindow" style="-jfx-button-type:: RAISED;" text="Minning Transactions" />
+                  <JFXButton onAction="#goToRaffles" prefHeight="25.0" prefWidth="94.0" style="-jfx-button-type:: RAISED;" text="Join Raffles" />
                </children>
             </FlowPane>
          </children>
@@ -87,13 +88,21 @@
    <top>
       <VBox prefHeight="91.0" prefWidth="711.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="51.0" prefWidth="500.0" text="FlipCoin - Mininng" textAlignment="CENTER" underline="true">
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="40.0" />
+                     </HBox.margin>
                   </Label>
+                  <JFXButton onAction="#exit" prefHeight="39.0" prefWidth="74.0" text="Logout">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXButton>
                </children></HBox>
             <HBox prefHeight="64.0" prefWidth="711.0">
                <children>

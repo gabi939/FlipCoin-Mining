@@ -112,6 +112,13 @@ public class MinerRaffle implements Initializable{
     	
 
     }
+ 
+
+    @FXML
+    void marketPrediction(ActionEvent event) {
+    	
+
+    }
     
     private void close() {
     	Stage stage = (Stage) tableRaffles.getScene().getWindow();

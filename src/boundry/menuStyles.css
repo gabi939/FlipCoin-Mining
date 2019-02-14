@@ -9,19 +9,19 @@
 	-fx-text-color: #ffa500;
     -fx-color: rgba(0,200,0);
 }
-Label{
+.label{
     -fx-effect: dropshadow(three-pass-box, white, 2, 1, 0, 0); 
 	-fx-color: #FFF;
 }
 
-ChoiceBox{
+.choiceBox{
 	    -fx-background-radius: 10;
   -fx-background-color: white;
   -fx-mark-color: orange;
  -fx-text-fill: blue; 
 }
 
-Button{
+.button{
  -fx-background-color: 
         #c3c4c4,
         linear-gradient(#d6d6d6 50%, white 100%),
@@ -32,7 +32,7 @@ Button{
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
 
 }
-TableView{ 
+.tableView{ 
 -fx-background-color: 
         #c3c4c4,
         linear-gradient(#d6d6d6 50%, white 100%),
@@ -40,4 +40,10 @@ TableView{
     -fx-background-insets: 0,1,1;
 	-fx-text-fill: black;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+}
+
+.jfx-button {
+	 -jfx-button-type: RAISED;
+     -fx-background-color: rgb(255,255,255);
+     -fx-text-fill: white;
 }
